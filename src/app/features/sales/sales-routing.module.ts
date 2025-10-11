@@ -16,10 +16,7 @@ const routes: Routes = [
       { path: 'product', component: ProductComponent },
       { path: 'accessories', component: AccessoriesComponent },
       {path:'productdetails',component:ProductDetailsComponent},
-      {
-        path: 'productlist', loadChildren: () => import('../store/store.module').then(m => m.StoreModule)
-      },
-
+      
     ]
   }
 ];

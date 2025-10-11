@@ -1,29 +1,24 @@
+<div class="sales_main">
 <div>
     <div   *ngIf="!showflag" class="gap-2 row">
- <div *ngFor="let tab of tabs" class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 ">
-<div class="shadow-lg rounded-2xl p-4 bg-white w-100 ">
-    <div>
-        <img src="" alt="">
+<div *ngFor="let tab of tabs" class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 " style="display: flex; gap:4.5rem">
+    <div class="card shadow-lg rounded-3 bg-white " style="width: 300px;height: 273px; cursor: pointer; justify-content: center;"
+        [routerLink]="tab.path" (click)="show()">
+        <div style=" display: flex; justify-content: center;"><img *ngIf="tab.icon" [src]="tab.icon" width="120" height="120" alt="{{tab.label}} icon"></div>
+        <div><h2  class=" text-center text-primary">{{ tab.label }}</h2></div>
+    <div ><h2 class="text-center"> Total Sale: {{ tab.todaySale }}</h2></div>
     </div>
-   
-    <a [routerLink]="tab.path" (click)="show()" >{{ tab.label }}</a>
-  
-</div>
 </div>
 </div>
 </div>
 
 
-<div *ngIf="showflag" class="border rounded p-4 bg-white w-100 h-100 overflow-hidden">
-<div class="d-flex justify-content-end mb-0">
-    <button (click)="back()" class="btn btn-primary">Back</button>
+<div *ngIf="showflag" class="border route_space rounded p-4 bg-white w-100  position-relative">
+<div class="back-container">
+    <button (click)="back()" class="btn btn-primary  ">Back</button>
 </div>
-
 <div>
-    <router-outlet>
-</router-outlet>
+    <router-outlet></router-outlet>
 </div>
-
-
-
+</div>
 </div>

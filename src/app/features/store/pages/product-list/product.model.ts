@@ -34,16 +34,23 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
       {
         productName: 'Headphone',
         models: [
-          { id: 1, category: 'Headphone', price: 150, description: 'Wired headphone', image: 'headphone1.jpg' },
-          { id: 2, category: 'Headphone', price: 180, description: 'Wireless headphone', image: 'headphone2.jpg' },
-          { id: 3, category: 'Headphone', price: 220, description: 'Noise-cancelling headphone', image: 'headphone3.jpg' }
+          { id: 1, category: 'Headphone', price: 150, description: 'Wired headphone', image: 'assets/img_icon/CARPRIE-Universal-3-5mm.jpg' },
+          { id: 2, category: 'Headphone', price: 180, description: 'Wireless headphone', image: 'assets/img_icon/wired_earphone.webp' },
+          { id: 3, category: 'Headphone', price: 220, description: 'Noise-cancelling headphone', image: 'assets/img_icon/liting_type_earphone.webp' },
+          { id: 4, category: 'Headphone', price: 999, description: 'Noise-cancelling headphone', image: 'assets/img_icon/wireless_mivi.jpg' },
+          { id: 5, category: 'Headphone', price: 1199, description: 'Noise-cancelling headphone', image: 'assets/img_icon/head_set_noice.jpg' },
+          { id: 6, category: 'Headphone', price: 1999, description: 'Noise-cancelling headphone', image: 'assets/img_icon/boAt_buird.jpg' },
         ]
       },
       {
         productName: 'Charger',
         models: [
-          { id: 4, category: 'Charger', price: 200, description: 'Type-C charger', image: 'charger1.jpg' },
-          { id: 5, category: 'Charger', price: 250, description: 'Fast charger', image: 'charger2.jpg' }
+          { id: 4, category: 'Charger', price: 1500, description: 'Type-C charger', image: 'assets/img_icon/nothing.avif' },
+          { id: 6, category: 'Charger', price: 1200, description: 'One Plus charger', image: 'assets/img_icon/1+_charger.jpg' },
+          { id: 7, category: 'Charger', price: 1800, description: 'samsung c to c', image: 'assets/img_icon/samsung_c_to_c.jpg' },
+          { id: 8, category: 'Charger', price: 4000, description: 'c to liting', image: 'assets/img_icon/c_to_liting.jpg' },
+          { id: 9, category: 'Charger', price: 250, description: 'Fast car charger', image: 'assets/img_icon/car_charger.jpg' },
+          { id: 10, category: 'Charger', price: 1999, description: 'Fast xiaomi charger', image: 'assets/img_icon/xiaomi_charger.jpg' },
         ]
       },
       {

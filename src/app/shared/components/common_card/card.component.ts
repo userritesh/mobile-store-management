@@ -14,6 +14,7 @@ export class CardComponent {
   @Input() subtitle?: string;
   @Input() price?: number;
   @Input() image?: string;
+  @Input() height?: string;
   @Input() route?: string;
 
   navigate() {
