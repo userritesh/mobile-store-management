@@ -12,6 +12,7 @@ import { filter } from 'rxjs';
 export class SalesComponent {
 
   activeTabId: SalesTab | null = null;
+  selectedTab: any;
 
   constructor(private location: Location,private router: Router) {
     this.router.events.pipe(
@@ -24,14 +25,13 @@ export class SalesComponent {
   }
 
 tabs = [
-  { label: 'Recharge', path: 'recharge',todaySale:"5000",icon:''},
-  { label: 'Phones', path: 'product',todaySale:"10000",icon:'assets/icons/cellphone.svg'},
-  { label: 'Accessories', path: 'accessories',todaySale:"3000",icon:'assets/img_icon/accessories.png'}
+  { label: 'Recharge',todaySale:"5000",icon:''},
+  { label: 'Phones', todaySale:"10000",icon:'assets/icons/cellphone.svg'},
+  { label: 'Accessories',todaySale:"3000",icon:'assets/img_icon/accessories.png'}
 ];
 showflag:boolean=false
 bakflag:boolean=false
 show(){
-  
   this.showflag = !this.showflag
 }
 back(){

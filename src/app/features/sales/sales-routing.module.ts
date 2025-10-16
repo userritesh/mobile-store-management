@@ -5,6 +5,7 @@ import { RechargeComponent } from './recharge/recharge.component';
 import { ProductComponent } from './product/product.component';
 import { AccessoriesComponent } from './accessories/accessories.component';
 import { ProductDetailsComponent } from '../store/pages/product-details/product-details.component';
+import { SallingDetailsDashboardComponent } from './salling-details-dashboard/salling-details-dashboard.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,7 @@ const routes: Routes = [
       { path: 'product', component: ProductComponent },
       { path: 'accessories', component: AccessoriesComponent },
       {path:'productdetails',component:ProductDetailsComponent},
+      {path:'sallingdetails',component:SallingDetailsDashboardComponent},
       
     ]
   }
