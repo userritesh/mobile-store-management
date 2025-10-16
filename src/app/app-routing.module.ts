@@ -12,16 +12,9 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent },
-      // { path: 'sales', component: SalesComponent },
       { path: 'sales', loadChildren: () => import('./features/sales/sales.module').then(m => m.SalesModule) },
-      // { path: 'purchase', loadChildren: () => import('./features/purchase/purchase.module').then(m => m.PurchaseModule) },
-      // { path: 'inventory', loadChildren: () => import('./features/inventory/inventory.module').then(m => m.InventoryModule) },
-      // { path: 'reports', loadChildren: () => import('./features/reports/reports.module').then(m => m.ReportsModule) },
-      // { path: 'users', loadChildren: () => import('./features/users/users.module').then(m => m.UsersModule) },
-      // { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
     ]
   },
-  // { path: 'store', loadChildren: () => import('./features/store/store.module').then(m => m.StoreModule) },
   { path: 'cart', loadChildren: () => import('./features/cart/cart.module').then(m => m.CartModule) },
   { path: 'checkout', loadChildren: () => import('./features/checkout/checkout.module').then(m => m.CheckoutModule) },
   { path: 'payments', loadChildren: () => import('./features/payments/payments.module').then(m => m.PaymentsModule) },

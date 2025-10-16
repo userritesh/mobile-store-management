@@ -1,10 +1,11 @@
 <div class="card shadow-lg rounded-2xl bg-white d-flex align-items-center ">
-  <img *ngIf="image" [src]="image" alt="card image" class="card-img">
-  <div class="card-body"  (click)="navigate()">
+  <img src="/assets/img_icon/No_product_img.png"   alt="card image" class="card-img">
+  <div class="card-body" (click)="navigate()">
     <h3>{{ title }}</h3>
-    <p *ngIf="subtitle">{{ subtitle }}</p>
-    <p >{{price}}</p>
-   [ route] = route
-    <ng-content></ng-content> 
+    <p class="text-truncate" *ngIf="subtitle">{{ subtitle }}</p>
+    <p>{{price}}</p>
+    <ng-content></ng-content>
   </div>
 </div>
+
+<!-- img *ngIf="image"  -->

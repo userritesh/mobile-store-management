@@ -11,7 +11,6 @@ import { DropdownComponent } from './components/form-controls/dropdown/dropdown.
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
 import { CardComponent } from './components/common_card/card.component';
-import { CartComponent } from '../features/cart/pages/cart/cart.component';
 
 
 
@@ -27,12 +26,12 @@ import { CartComponent } from '../features/cart/pages/cart/cart.component';
     DropdownComponent,
     SidebarComponent,
     CardComponent
-   
+
   ],
   imports: [
     CommonModule,
     RouterModule,
-    
+
   ],
   exports: [
     FooterComponent,

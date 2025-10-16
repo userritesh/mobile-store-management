@@ -7,11 +7,10 @@ import { RechargeComponent } from './recharge/recharge.component';
 import { ProductComponent } from './product/product.component';
 import { AccessoriesComponent } from './accessories/accessories.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { StoreModule } from '../store/store.module';
 
 
 @NgModule({
-   declarations: [
+  declarations: [
     SalesComponent,
     RechargeComponent,
     ProductComponent,
@@ -22,13 +21,12 @@ import { StoreModule } from '../store/store.module';
     CommonModule,
     SalesRoutingModule,
     SharedModule,
-    StoreModule
   ],
-  exports:[
+  exports: [
     SalesComponent,
     AccessoriesComponent,
     RechargeComponent
-    
+
   ]
 })
 export class SalesModule { }

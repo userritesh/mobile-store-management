@@ -1,30 +1,9 @@
-<!-- <div class="row rounded-2xl p-4 bg-white h-100">
-  <div *ngFor="let assessori of assessoriess" class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
-    <div class="shadow-lg rounded-2xl bg-white p-3 h-100 d-flex flex-column align-items-center">
-      
-      <img [src]="assessori.src" alt="" class="img-fluid mb-2
-      ">
-     alt="Product Image" 
-     class="img-fluid">
-
-     
-      <p class="text-muted mb-1">{{assessori.detailes}}</p>
-      <p class="text-primary mb-0">{{"Price: " + assessori.Price}}</p>
-
-
-    </div>
-  </div>
-</div> -->
 
 <div class="row rounded-2xl p-4 bg-white h-100">
   <div *ngFor="let assessori of assessoriess" class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
-    <app-card
-      [title]="assessori.product_name"
-      [subtitle]="assessori.detailes"
-      [price]="assessori.Price"
-      [image]="assessori.src"
-      [route]="'/product'"></app-card>>    
+    <app-card [title]="assessori.product_name" [subtitle]="assessori.detailes" [price]="assessori.Price"
+      [image]="'src\assets\img_icon'" [route]="'/sales/productlist'"></app-card>
   </div>
 </div>
 
-
+<router-outlet></router-outlet>

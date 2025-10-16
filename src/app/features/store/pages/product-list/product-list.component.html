@@ -1,6 +1,6 @@
-<app-card
-  title="My Product"
-  subtitle="This is a reusable card component"
-  image="assets/images/product.jpg">
-  <button class="btn btn-primary">Buy Now</button>
-</app-card>
+<div *ngFor="let selectcat of productlist" class="d-flex flex-row gap-2 ">
+  <app-card *ngFor="let model of selectcat.models" [title]="model.category" [subtitle]="model.description"
+    [image]="model.image" [price]="model.price">
+    <button class="btn btn-primary">Buy Now</button>
+  </app-card>
+</div>
