@@ -1,0 +1,14 @@
+<div class="row rounded-2xl p-4 bg-white h-100">
+  <div *ngFor="let selectcat of productlist" class=" row">
+    <div *ngFor="let model of selectcat.models" class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+      <app-card 
+        [title]="model.category"
+        [subtitle]="model.description"
+        [image]="model.image"
+        [price]="model.price"
+        height="300">
+        <button class="btn btn-primary">Buy Now</button>
+      </app-card>
+    </div>
+  </div>
+</div>

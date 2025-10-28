@@ -1,0 +1,12 @@
+
+<div class="row rounded-2xl p-4 bg-white h-100">
+  <div *ngFor="let assessori of assessoriess" class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+    <app-card [title]="assessori.product_name" [subtitle]="assessori.detailes"
+      [image]="assessori.src" [route]="'/stock/productlist'" height="180">
+   </app-card>
+  </div>
+</div>
+
+<div class="w-100">
+  <router-outlet></router-outlet>
+</div>
