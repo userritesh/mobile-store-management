@@ -1,0 +1,16 @@
+    <form class="popupModal" >
+            <div class="d-flex justify-content-end w-100 pe-1">
+                <app-button (buttonOutputEvent)="close()" [buttonType]="'button'" [tag]="'X'"></app-button>
+            </div>
+    <div class="col ">
+    <app-input [inputType]="'text'" [inputId]="'label'" [inputName]="'label'" [(inputvalue)]="label" [inputPlaceholder]="'Enter Label'"
+        [requiredField]="true" [label]="'Label'">
+    </app-input>
+    <div  ngx-dropzone 
+    [accept]="data?.isAcceptAllDoc ? '*' : 'image/jpeg,.png,.jpg,.glb,.stl'" 
+    (change)="onSelect($event)"> </div>
+    <div  *ngFor="let file of files" class="preview-image" > <img [src]="file.url" alt=""></div>
+    <h4>uploadImage</h4></div>
+
+       <app-button class="mb-3" (buttonOutputEvent)="addCard()" [buttonType]="'button'" [tag]="'Save'"></app-button>
+    </form>

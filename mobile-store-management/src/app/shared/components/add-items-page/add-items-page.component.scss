@@ -1,0 +1,21 @@
+.popupModal{
+
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.preview-image {
+  width: 200px;
+  height: 200px;
+  overflow: hidden;       /* hides anything outside the box */
+  border: 1px solid #ccc; /* optional border for visibility */
+  margin: 10px;
+}
+
+.preview-image img {
+  width: 100%;            /* fit width of the div */
+  height: 100%;           /* fit height of the div */
+  object-fit: cover;      /* scales and crops image nicely */
+}

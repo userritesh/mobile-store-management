@@ -1,0 +1,23 @@
+<div class="d-flex flex-column gap-3 border p-2 rounded">
+    <form class=" p-2 ">
+        <div class="d-flex justify-content-end pb-2"><app-button class="btn-primary" [tag]="'Save'" (click)="onSave()"></app-button></div>
+        <div class="border p-2 rounded">
+            <div class="d-flex col-12 gap-3" > 
+            <div class="col form" >
+                         <app-input [inputPlaceholder]="'Product Name'" [width]="'110px'" [label]="'Product Name'"></app-input>
+
+            </div>
+        <app-input class="col-4" [inputPlaceholder]="'Product Category'"  [width]="' 145px'" [label]="'Product Category'"></app-input>
+        <app-input class="col-4" [inputPlaceholder]="'Product Price '"  [width]="'110px'" [label]="'Product Price'"></app-input>
+        </div>
+        <div class="d-flex col-12 gap-3">
+              <app-input class="col" [inputPlaceholder]="'Product Purchase date '"  [width]="'110px'" [label]="'Product Purchase date '"></app-input>
+                <app-input class="col" [inputPlaceholder]="'Product img '"  [width]="'110px'" [label]="'Product img'"></app-input>
+   
+        </div>
+        </div>
+       </form>
+       <div>
+        <app-grid></app-grid>
+       </div>
+</div>

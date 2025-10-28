@@ -1,0 +1,9 @@
+<div class="d-flex flex-column gap-3" >
+  <div style="height: 350px;"> <app-chart-options></app-chart-options>
+  </div>
+  <div><app-grid 
+  [dataModel]="gridData"
+  [rowData]="filteredData"
+  (rowClicked)="onMobileClick($event)">
+</app-grid></div>
+</div>

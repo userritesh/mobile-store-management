@@ -1,0 +1,24 @@
+<div class="d-flex" id="wrapper main">
+  <!-- Page Content -->
+  <div id="page-content-wrapper" >
+    <!-- Top Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+      <div class="container-fluid">
+        <button class="btn btn-outline-secondary" id="menu-toggle">☰</button>
+        <span class="ms-auto fw-bold">Welcome, Admin</span>
+      </div>
+    </nav>
+    
+    <div class="d-flex"><!-- Sidebar -->
+    <div class=" text-dark border-end sidebar_height mt-2 mb-2 rounded" id="sidebar-wrapper">
+
+    <app-sidebar></app-sidebar>
+  </div>
+    <!-- Main Content -->
+    <div class="container-fluid p-4  main_content" style="height: calc(100vh - 98px);">
+      <router-outlet></router-outlet>
+    </div></div>
+    <!-- Footer -->
+     <app-footer></app-footer>
+  </div>
+</div>

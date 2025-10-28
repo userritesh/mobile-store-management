@@ -1,0 +1,36 @@
+.invoice-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 90vh;
+  background-color: #f7f9fc;
+  padding: 30px;
+}
+
+.invoice-card {
+  width: 100%;
+  max-width: 800px;
+}
+
+.table {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  height: 500px;
+}
+
+@media print {
+  .invoice-container {
+    background: #fff;
+    padding: 0;
+  }
+
+  .invoice-card {
+    box-shadow: none;
+    border: none;
+  }
+
+  button {
+    display: none;
+  }
+}

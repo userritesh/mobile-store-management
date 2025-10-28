@@ -1,0 +1,14 @@
+<div class="d-flex align-items-center gap-2 mb-3 col-12">
+  <label [for]="inputId" class="fw-semibold text-primary fs-6 small col-4 mb-0 "  [style.width]="width">{{ label }}</label>
+  <input
+    [type]="inputType || 'text'"
+    [id]="inputId"
+    [name]="inputName"
+    [placeholder]="inputPlaceholder"
+    [required]="requiredField"
+    [(ngModel)]="inputvalue"
+    (ngModelChange)="inputvalueChange.emit($event)"
+    class="form-control"
+    
+    />
+</div>

@@ -1,0 +1,46 @@
+<div class="sales_main">
+  <div class="gap-0.5 row">
+
+    <!-- Skeleton Cards while data is loading -->
+    <ng-container *ngIf="!tabs || tabs.length === 0">
+      <div *ngFor="let dummy of [1,2,3,4,5,6,7,8]" class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+        <div class="card shadow-lg rounded-3 bg-white p-3 shine" style="width: 300px; height: 273px;">
+          <!-- Image Placeholder -->
+          <div class="skeleton skeleton-img mx-auto mb-2"></div>
+          <!-- Header Placeholder -->
+          <div class="skeleton skeleton-header mx-auto mb-1"></div>
+          <!-- Total Sale Placeholder -->
+          <div class="skeleton skeleton-text mx-auto"></div>
+        </div>
+      </div>
+    </ng-container>
+
+    <!-- Real Cards when data is loaded -->
+    <ng-container *ngIf="tabs && tabs.length > 0 && !showflag">
+      <div *ngFor="let tab of tabs" class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+        <div class="card shadow-lg rounded-3 bg-white p-3" style="width: 300px; height: 273px; cursor: pointer;"
+             [routerLink]="['sallingdetails', tab.label]" (click)="show()">
+          <div style="display: flex; justify-content: center;">
+            <img *ngIf="tab.icon" [src]="tab.icon" width="120" height="120" alt="{{tab.label}} icon">
+          </div>
+          <div><h2 class="text-center text-primary">{{ tab.label }}</h2></div>
+          <div><h3 class="text-center">Total Sale: {{ tab.today_sale }}</h3></div>
+        </div>
+      </div>
+    </ng-container>
+
+  </div>
+
+  <div *ngIf="showflag" class="border route_space rounded p-4 bg-white w-100 position-relative">
+    <div class="back-container">
+      <button (click)="back()" class="btn btn-primary">Back</button>
+    </div>
+    <div>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+    
+  <div class="plusIcon"  *ngIf="!showflag"(click)="addDetails()">
+    <img src="assets/icons/plus.svg" alt="">
+  </div>
+</div>
