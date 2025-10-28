@@ -11,6 +11,8 @@ import { DropdownComponent } from './components/form-controls/dropdown/dropdown.
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
 import { CardComponent } from './components/common_card/card.component';
+import { GridComponent } from './components/grid/grid.component';
+import { AgGridModule } from 'ag-grid-angular';
 
 
 
@@ -25,18 +27,20 @@ import { CardComponent } from './components/common_card/card.component';
     InputComponent,
     DropdownComponent,
     SidebarComponent,
-    CardComponent
-
+    CardComponent,
+    GridComponent,
   ],
   imports: [
     CommonModule,
     RouterModule,
-
-  ],
+    AgGridModule
+     ],
   exports: [
     FooterComponent,
     SidebarComponent,
-    CardComponent
+    CardComponent,
+    GridComponent
+
   ]
 })
 export class SharedModule { }

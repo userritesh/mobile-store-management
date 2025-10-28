@@ -13,6 +13,8 @@ const routes: Routes = [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'sales', loadChildren: () => import('./features/sales/sales.module').then(m => m.SalesModule) },
+      { path: 'stock', loadChildren: () => import('./features/stock/stock.module').then(m => m.StockModule) },
+
     ]
   },
   { path: 'cart', loadChildren: () => import('./features/cart/cart.module').then(m => m.CartModule) },

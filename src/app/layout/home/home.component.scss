@@ -1,11 +1,12 @@
 #wrapper {
-  min-height: 100vh;
+  height:100%;
   display: flex;
+  width: 100%;
 }
 
 /* Sidebar */
 #sidebar-wrapper {
-  width: 220px;
+  width: 12%;
   transition: all 0.3s;
 }
 #sidebar-wrapper .list-group-item {
@@ -18,5 +19,11 @@
 
 /* Page Content */
 #page-content-wrapper {
-  flex-grow: 1;
+  width: 88%;
+}
+
+.main_content{
+ height: calc(100vh - 98px);
+overflow-y: hidden;
+ overflow-x: hidden;
 }

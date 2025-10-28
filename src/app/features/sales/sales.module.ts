@@ -5,8 +5,8 @@ import { SalesRoutingModule } from './sales-routing.module';
 import { SalesComponent } from './sales/sales.component';
 import { RechargeComponent } from './recharge/recharge.component';
 import { ProductComponent } from './product/product.component';
-import { AccessoriesComponent } from './accessories/accessories.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { SallingDetailsDashboardComponent } from './salling-details-dashboard/salling-details-dashboard.component';
 
 
 @NgModule({
@@ -14,18 +14,20 @@ import { SharedModule } from 'src/app/shared/shared.module';
     SalesComponent,
     RechargeComponent,
     ProductComponent,
-    AccessoriesComponent
+    SallingDetailsDashboardComponent,
+
   ],
 
   imports: [
     CommonModule,
     SalesRoutingModule,
-    SharedModule,
+    SharedModule
+
+    
   ],
   exports: [
     SalesComponent,
-    AccessoriesComponent,
-    RechargeComponent
+    RechargeComponent,
 
   ]
 })

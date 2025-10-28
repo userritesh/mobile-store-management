@@ -1,10 +1,10 @@
-<div class="d-flex" id="wrapper">
+<div class="d-flex" id="wrapper main">
   <!-- Sidebar -->
-   <div class="bg-dark text-white border-end" id="sidebar-wrapper"> 
+   <div class="bg-dark text-white border-end sidebar_height" id="sidebar-wrapper" > 
     <app-sidebar></app-sidebar>
   </div>
   <!-- Page Content -->
-  <div id="page-content-wrapper" class="flex-grow-1">
+  <div id="page-content-wrapper" >
     <!-- Top Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
       <div class="container-fluid">
@@ -14,7 +14,7 @@
     </nav>
 
     <!-- Main Content -->
-    <div class="container-fluid p-4 overflow-hidden" style="height: calc(100vh - 98px);">
+    <div class="container-fluid p-4  main_content" style="height: calc(100vh - 98px);">
       <router-outlet></router-outlet>
     </div>
 
