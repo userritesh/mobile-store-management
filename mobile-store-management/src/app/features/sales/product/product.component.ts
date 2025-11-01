@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { InputComponent } from 'src/app/shared/components/form-controls/input/input.component';
+import { GridModel } from 'src/app/shared/components/grid/grid-model.model';
+import { AgGridDataModelPurchaseForm } from './product.model';
 
 @Component({
   selector: 'app-product',
@@ -8,7 +10,13 @@ import { InputComponent } from 'src/app/shared/components/form-controls/input/in
 })
 export class ProductComponent {
   todayDate = new Date();
+  agGridDataModel!: GridModel;
 
+
+
+  ngOnInit(): void {
+    this.agGridDataModel = AgGridDataModelPurchaseForm;
+  }
 
   
   onSave(){

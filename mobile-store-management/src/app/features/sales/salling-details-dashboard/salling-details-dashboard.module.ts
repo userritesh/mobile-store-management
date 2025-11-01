@@ -1,7 +1,7 @@
 import { GridModel } from 'src/app/shared/components/grid/grid-model.model';
 
 export const sellingItemsGrid: GridModel = {
-  columns: [
+  colDefs: [
     { field: 'id', headerName: 'ID', sortable: true, filter: true, },
     { field: 'category', headerName: 'Category', sortable: true, filter: true, },
     { field: 'itemName', headerName: 'Item Name', sortable: true, filter: true, },
