@@ -17,6 +17,8 @@ export class ReportDashboardComponent {
  ngOnInit(){
     this.sellingService.getdata().subscribe(product=>{
       this.selectedProduct =product;
-    });
+    }); 
   }
+          // <!-- fields = ['id', 'category', 'item_name', 'brand', 'quantity', 'unit_price', 'total_price'] -->
+
 }

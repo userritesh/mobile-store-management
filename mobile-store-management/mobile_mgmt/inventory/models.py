@@ -16,16 +16,24 @@ class DashboardCard(models.Model):
 
 
 # Products (like accessories, phones, tablets)
+from django.db import models
+
 class Product(models.Model):
-    dashboard_card = models.ForeignKey(DashboardCard, on_delete=models.CASCADE, related_name="products")
     name = models.CharField(max_length=100)
+    productcategory = models.CharField(max_length=50, blank=True, null=True)
     brand = models.CharField(max_length=50, blank=True, null=True)
     details = models.TextField(blank=True, null=True)
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    image_src = models.CharField(max_length=255, blank=True, null=True)
+
+    # this will store actual image file
+    image = models.ImageField(upload_to='products/', blank=True, null=True)
+
+    # DO NOT store base64 here anymore (remove image_src from DB)
+    # base64 will only be used temporarily in serializer, not in DB
 
     def __str__(self):
         return f"{self.name} ({self.brand})"
+
 
 # Selling Items (grid data)
 class SellingItem(models.Model):
