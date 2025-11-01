@@ -16,16 +16,32 @@ export class ProductListComponent {
 
   etcdata: any;
   title: any;
+  titalname!:string;
+  allProductList: any[] = [];
   constructor(public storageService: StorageService,private sellingService:CommonServiceTsService, private router:Router ) { }
+
+
   ngOnInit(): void {
-    var titalname = this.storageService.getItem(Storagekey.SelectedProductTitle, true,)
+    this.titalname = this.storageService.getItem(Storagekey.SelectedProductTitle, true,)
     const data = PRODUCT_CATEGORIES.find((cat) => cat.category === ProductTypeEnum.Accessories);
-    if (data) {
-      this.productlist = data.products.filter(p => (p.productName.toLowerCase() == titalname.toLowerCase()))
-      console.log(this.productlist)
-    }
+    this.getAllProductListdata();
 
   }
+
+  getAllProductListdata() {
+    this.sellingService.getAllProducts().subscribe({
+      next: (res) => {
+        if (res) {
+          this.allProductList = res.filter((data: any) =>
+            (data.productcategory?.toLowerCase() || '') === (this.titalname?.toLowerCase() || '')
+          );
+
+          console.log(this.productlist);
+        }
+      }
+    })
+  }
+
   onSale(data:any){
     this.sellingService.setdata(data)
     this.router.navigate(['/stock/reports']);

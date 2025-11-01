@@ -12,14 +12,6 @@ import { AgGridDataModelPurchaseForm } from './product.model';
 export class ProductComponent {
   todayDate = new Date();
   agGridDataModel!: GridModel;
-
-
-
-  ngOnInit(): void {
-    this.agGridDataModel = AgGridDataModelPurchaseForm;
-  }
-
-  
   selectedProduct:any = {};
   image:any;
   preview:any
@@ -27,6 +19,25 @@ export class ProductComponent {
   resData: any;
 
 constructor(private sellingService:CommonServiceTsService){}
+
+ ngOnInit(): void {
+   this.agGridDataModel = AgGridDataModelPurchaseForm; 
+   this.getAllProduct();
+  }
+
+
+  getAllProduct(){
+    this.sellingService.getAllProducts().subscribe({
+     next: (res) => {
+       this.resData = res;
+     }, error(err) {
+       console.error(err)
+     }
+   });
+  }
+
+
+
 fileSelected(files:any){
   const newFile =files[0]?.file
   this.image = newFile
@@ -37,16 +48,15 @@ fileSelected(files:any){
   };
   reader.readAsDataURL(this.image);
 }
+
+
+
   onSave(){
     this.selectedProduct ={ ...this.selectedProduct,image_src: this.imageBase64   }
         this.sellingService.insertUpdateProducts(this.selectedProduct).subscribe({next:(res)=>{
          if(res.isSuccess){
           this.selectedProduct= {};
-          this.sellingService.getAllProducts().subscribe({next:(res)=>{
-            this.resData = res;
-         },error(err){
-          console.error(err)
-         }})
+          this.getAllProduct();
          }
         },error:(err)=>{
         console.error(err);   
