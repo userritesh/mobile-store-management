@@ -55,4 +55,4 @@ export class StockListComponent {
     this.location.back();
   }
   
-}
+ }
