@@ -10,19 +10,23 @@ ModuleRegistry.registerModules([ClientSideRowModelModule]);
   styleUrls: ['./grid.component.scss']
 })
 export class GridComponent {
-  @Input() rowData: any[] = [];
+  // @Input() rowData: any[] = [];
   @Input() dataModel!: GridModel;
+
+  @Input() columnDefs: any[] = [];
+  @Input() rowData: any[] = [];
+
 
   @Output() rowClicked = new EventEmitter<any>();
   @Output() gridReadyEvent = new EventEmitter<any>();
 
-  columnDefs: any[] = [];
+  colDefs: any[] = [];
   pagination = true;
   paginationPageSize = 10;
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['dataModel'] && this.dataModel) {
-      this.columnDefs = this.dataModel.columns || [];
+      this.columnDefs = this.dataModel.colDefs || [];
       this.pagination = this.dataModel.pagination ?? true;
       this.paginationPageSize = this.dataModel.pageSize ?? 10;
       console.log('columnDefs:', this.columnDefs);

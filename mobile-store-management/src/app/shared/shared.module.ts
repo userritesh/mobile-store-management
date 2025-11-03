@@ -21,6 +21,7 @@ import { ProductComponent } from '../features/sales/product/product.component';
 import { ChartOptionsComponent } from './components/chart-options/chart-options';
 import { ReportsModule } from '../features/reports/reports.module';
 import { DatePickerComponent } from './components/date-picker/date-picker.component';
+import { ImageInputComponent } from './components/image-input/image-input.component';
 
 
 
@@ -42,6 +43,7 @@ import { DatePickerComponent } from './components/date-picker/date-picker.compon
     ProductComponent,
     ChartOptionsComponent,
     DatePickerComponent,
+    ImageInputComponent,
     
   ],
   imports: [

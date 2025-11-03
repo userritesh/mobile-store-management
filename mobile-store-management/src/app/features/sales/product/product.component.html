@@ -4,20 +4,31 @@
         <div class="border p-2 rounded">
             <div class="d-flex col-12 gap-3" > 
             <div class="col form" >
-                         <app-input [inputPlaceholder]="'Product Name'" [width]="'110px'" [label]="'Product Name'"></app-input>
-
+               <app-input [inputPlaceholder]="'Product Name'" [width]="'110px'" [label]="'Product Name'" [(inputvalue)]="selectedProduct.name"></app-input>
             </div>
-        <app-input class="col-4" [inputPlaceholder]="'Product Category'"  [width]="' 145px'" [label]="'Product Category'"></app-input>
-        <app-input class="col-4" [inputPlaceholder]="'Product Price '"  [width]="'110px'" [label]="'Product Price'"></app-input>
+        <app-input class="col-4" [inputPlaceholder]="'Product Category'"  [width]="' 145px'" [(inputvalue)]="selectedProduct.productcategory" [label]="'Product Category'"></app-input>
+        <app-input class="col-4" [inputPlaceholder]="'Product Price '"  [width]="'110px'" [(inputvalue)]="selectedProduct.price" [label]="'Product Price'"></app-input>
         </div>
         <div class="d-flex col-12 gap-3">
-              <app-input class="col" [inputPlaceholder]="'Product Purchase date '"  [width]="'110px'" [label]="'Product Purchase date '"></app-input>
-                <app-input class="col" [inputPlaceholder]="'Product img '"  [width]="'110px'" [label]="'Product img'"></app-input>
+                <app-input class="col" [inputPlaceholder]="'Product Brand '" [(inputvalue)]="selectedProduct.brand" [width]="'110px'" [label]="'Product brand'"></app-input>
+                <app-input class="col" [inputPlaceholder]="'Product details '" [(inputvalue)]="selectedProduct.details" [width]="'110px'" [label]="'Product details'"></app-input>
+                <div class="d-flex gap-2 align-items-center">
+                    <label for="" class="text-primary fs-6 fw-semibold">Product image</label>
+                    <app-image-input [height]="'40px'" [width]="'120px'" (fileSelected)="fileSelected($event)"></app-image-input>
+                </div>
+              <div *ngIf="preview" class="position-relative d-inline-block mt-2">  <img  [src]="preview" alt="Preview" width="80" height="80" style="object-fit: cover; border-radius: 5px;">
+                <app-button (click)="cancel()" [tag]="'x'" class=" btn btn-sm btn-danger position-absolute top-0 end-0 rounded-circle p-0 "></app-button>
+            </div>
+                                
    
         </div>
         </div>
        </form>
        <div>
-        <app-grid></app-grid>
+        <app-grid
+            [dataModel]="agGridDataModel"
+            [rowData]="resData"
+        >
+        </app-grid>
        </div>
 </div>
