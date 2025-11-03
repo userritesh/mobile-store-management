@@ -4,6 +4,6 @@ export enum SalesTab {
   Accessories = 'accessories',
   ProductList = 'productlist',
   Sales = 'sales',
-  Stock = "Stock",
-  Invoice = "Invoice",
+  Stock = "stock",
+  Invoice = "reports",
 }
