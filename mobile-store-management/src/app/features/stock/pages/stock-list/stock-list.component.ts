@@ -19,7 +19,10 @@ export class StockListComponent {
       const currentUrl = event.urlAfterRedirects;
       const lastSegment = currentUrl.split('/').pop();
       this.activeTabId = lastSegment as SalesTab;
-      if (this.activeTabId == SalesTab.Stock || this.activeTabId == SalesTab.Invoice) { this.onInit() }
+      // if (this.activeTabId == SalesTab.Stock || this.activeTabId == SalesTab.Invoice) { this.onInit() }
+      
+      // ************** CHANGED (optimization) **************
+      if ([SalesTab.Stock, SalesTab.Invoice].includes(this.activeTabId)) this.onInit();
     });
   }
 
@@ -30,17 +33,17 @@ export class StockListComponent {
   ];
   showflag: boolean = false
   bakflag: boolean = false
-  onInit() {
-    this.showflag = false;
-    switch (this.activeTabId) {
-      case SalesTab.Accessories:
-        this.showflag = false;
-        break;
-      case SalesTab.Invoice:
-        this.showflag = true;
-        break;
-    }
-  }
+ onInit() {
+  // this.showflag = false;
+
+  // switch (this.activeTabId) {
+  //   case SalesTab.Invoice:
+  //     this.showflag = true;
+  //     break;
+  // }
+    // ************** CHANGED (single expression control) **************
+   this.showflag = this.activeTabId === SalesTab.Invoice;
+}
 
   show() {
     this.showflag = !this.showflag;
