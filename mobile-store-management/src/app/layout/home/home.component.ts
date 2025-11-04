@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
 
-}
+  toggleSidebar() {
+      const wrapper = document.getElementById('wrapper');
+      wrapper?.classList.toggle('collapsed');
+  }
+  }
+
