@@ -1,1 +1,18 @@
-<p>dropdown works!</p>
+<div class="form-group d-flex gap-2 w-100">
+  <label *ngIf="label" class="text-primary">{{ label }}</label>
+
+  <ng-select 
+  class="border pb-2"
+    [items]="items"
+    [bindLabel]="bindLabel"
+    [bindValue]="bindValue"
+    [searchable]="searchable"
+    [clearable]="true"
+    [placeholder]="placeholder"
+    [(ngModel)]="value"
+    [disabled]="disabled"
+    (open)="onOpen()"
+    (close)="onClose()"
+    (change)="onChange($event)">
+  </ng-select>
+</div>

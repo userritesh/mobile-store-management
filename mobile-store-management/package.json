@@ -23,6 +23,7 @@
     "@angular/router": "^16.2.0",
     "@fortawesome/fontawesome-free": "^7.1.0",
     "@ng-bootstrap/ng-bootstrap": "^15.1.2",
+    "@ng-select/ng-select": "^11.2.0",
     "@popperjs/core": "^2.11.8",
     "ag-grid-angular": "^32.3.9",
     "ag-grid-community": "^32.3.9",

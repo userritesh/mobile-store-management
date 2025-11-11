@@ -2,16 +2,20 @@
   <div id="page-content-wrapper">
     <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
       <div class="container-fluid">
-        <button class="navbar-toggler btn btn-outline-secondary" type="button" id="menu-toggle"
+        <button class="navbar-toggler btn btn-outline-secondary p-1" type="button" id="menu-toggle"
           aria-label="Toggle sidebar" (click)="toggleSidebar()">
           <span class="navbar-toggler-icon"></span>
         </button>
+        <div class="d-flex gap-3">
+          <span><i class="fa-solid fa-circle-user fs-4"></i>
+</span>
         <span class="ms-auto fw-bold">Welcome, Admin</span>
+        </div>
       </div>
     </nav>
 
-    <div class="d-flex">
-      <div id="sidebar-wrapper" class="sidebar">
+    <div class="d-flex  ">
+      <div id="sidebar-wrapper" class="sidebar mt-1 mb-1 border rounded">
         <app-sidebar></app-sidebar>
       </div>
 

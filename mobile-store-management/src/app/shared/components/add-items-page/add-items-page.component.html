@@ -2,10 +2,34 @@
             <div class="d-flex justify-content-end w-100 pe-1">
                 <app-button (buttonOutputEvent)="close()" [buttonType]="'button'" [tag]="'X'"></app-button>
             </div>
+            <div >
+                <h3>{{modalTitle}}</h3>
+            </div>
     <div class="col ">
     <app-input [inputType]="'text'" [inputId]="'label'" [inputName]="'label'" [(inputvalue)]="label" [inputPlaceholder]="'Enter Label'"
         [requiredField]="true" [label]="'Label'">
     </app-input>
+    <div *ngIf="modalTitle=='Add Product category'">
+<app-dropdown
+  label="Category"
+  placeholder="Select Category"
+  [items]="categoryList"
+  bindLabel="name"
+  bindValue="id"
+  [(value)]="selectedCategory">
+</app-dropdown>
+
+
+
+
+
+
+
+
+        <!-- <app-input [inputType]="'text'" [inputId]="'Category'" [inputName]="'Category'" [(inputvalue)]="category"
+            [inputPlaceholder]="'Enter Label'" [requiredField]="true" [label]="'Category'">
+        </app-input> -->
+    </div>
     <div  ngx-dropzone 
     [accept]="data?.isAcceptAllDoc ? '*' : 'image/jpeg,.png,.jpg,.glb,.stl'" 
     (change)="onSelect($event)"> </div>

@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { CommonServiceTsService } from 'src/app/common.service.ts.service';
+import { ModalPopupSize } from 'src/app/shared/common-enum/common-enum.module';
+import { AddItemsPageComponent } from 'src/app/shared/components/add-items-page/add-items-page.component';
+import { CommonPopupModelService } from 'src/app/shared/components/common-popup-model.service';
 
 @Component({
   selector: 'app-accessories',
@@ -6,6 +10,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./accessories.component.scss']
 })
 export class AccessoriesComponent {
+
+  constructor(public popup:CommonPopupModelService,private productSubcategor:CommonServiceTsService){}
 
 
 assessoriess:any [] =[
@@ -43,4 +49,21 @@ assessoriess:any [] =[
     src:""
   }
 ]
+
+addCard(){
+this.popup.openModalPopup(AddItemsPageComponent,null,'Add Product category',ModalPopupSize.MD,'',false,true).then(res=>{
+  console.log(res);
+ this.productSubcategor.insertUpdateproductSubcategor(res).subscribe(res=>{
+  if(res.isSuccess){
+     this.productSubcategor.getproductSubcategor().subscribe(res=>{
+      if(res){
+        console.log(res);
+        
+      }
+     })
+  }
+ })
+  
+})
+}
 }

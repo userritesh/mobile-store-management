@@ -2,8 +2,8 @@ from django.shortcuts import render
 
 # Create your views here.
 from rest_framework import viewsets
-from .models import DashboardCard, Product, SellingItem
-from .serializers import DashboardCardSerializer, ProductSerializer, SellingItemSerializer
+from .models import DashboardCard, Product, Productcategory, SellingItem,Stockcategory
+from .serializers import DashboardCardSerializer, ProductSerializer, ProductcategorySerializer, SellingItemSerializer, StockcategorySerializer
 from rest_framework.response import Response
 from rest_framework import status
 
@@ -48,3 +48,22 @@ class ProductViewSet(viewsets.ModelViewSet):
 class SellingItemViewSet(viewsets.ModelViewSet):
     queryset = SellingItem.objects.all()
     serializer_class = SellingItemSerializer
+
+class StockcategoryViewSet(viewsets.ModelViewSet):
+    queryset = Stockcategory.objects.all()
+    serializer_class =StockcategorySerializer
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+
+        return Response({
+            "isSuccess": True,
+            "message": "Product created successfully",
+            "data": serializer.data
+        }, status=status.HTTP_201_CREATED)
+
+class ProductSubcategoryViewSet(viewsets.ModelViewSet):
+    queryset = Productcategory.objects.all()
+    serializer_class = ProductcategorySerializer
