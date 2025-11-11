@@ -17,3 +17,20 @@
  height: calc(100vh - 140px);
  overflow-y: auto;
 }
+
+.plusIcon{
+  width: 40px;
+  height: 40px;
+  background-color: blue;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  position: absolute;
+  z-index: 1;
+  top: 530px;
+  right: 140px;
+  cursor: pointer;
+  border:2px solid white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}

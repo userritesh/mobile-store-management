@@ -9,9 +9,12 @@ import { Observable } from 'rxjs/internal/Observable';
 export class CommonServiceTsService {
 
   constructor(private http: HttpClient) { }
-  private apiUrl = 'http://localhost:8000/api/dashboard/';
-  private apiproducts = 'http://localhost:8000/api/products/';
-    private selectedProduct = new BehaviorSubject<any>(null);
+
+  private apiUrl = 'http://localhost:8000/api/dashboard/'; // /sales tab Api
+  private apiproducts = 'http://localhost:8000/api/products/';//use Api for purchase products  and stock products
+  private apistockcategory = 'http://localhost:8000/api/stockcategory/';// stockcategory tab Api (main service category)
+  private productSubcategor = 'http://localhost:8000/api/productSubcategor/';// productSubcategor tab Api 
+  private selectedProduct = new BehaviorSubject<any>(null);
 
 
    getSellingItems(): Observable<any> {
@@ -38,5 +41,18 @@ export class CommonServiceTsService {
     return this.http.get(this.apiproducts)
   }
 
+  allstockcategory(data:any):Observable<any>{
+    return this.http.post(this.apistockcategory,data)
+  }
+
+   getstockcategory():Observable<any>{
+    return this.http.get(this.apistockcategory)
+  }
+  insertUpdateproductSubcategor(data:any):Observable<any>{
+    return this.http.post(this.productSubcategor,data)
+  }
+   getproductSubcategor():Observable<any>{
+    return this.http.get(this.productSubcategor)
+  }
 }
 

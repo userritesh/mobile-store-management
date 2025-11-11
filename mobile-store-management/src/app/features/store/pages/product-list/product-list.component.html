@@ -1,6 +1,5 @@
 <div class="row rounded-2xl p-4 bg-white h-100">
-  <div *ngFor="let selectcat of allProductList" class=" row">
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4" *ngFor="let selectcat of allProductList">
       <app-card 
         [title]="selectcat.name"
         [subtitle]="selectcat.details"
@@ -11,5 +10,4 @@
       </app-card>
     </div>
   </div>
-</div>
 

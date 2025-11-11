@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import DashboardCard, Product, SellingItem
+from .models import DashboardCard, Product, Productcategory, SellingItem, Stockcategory
 import base64
 import uuid
 from PIL import Image
@@ -79,3 +79,14 @@ class SellingItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = SellingItem
         fields = ['id', 'category', 'item_name', 'brand', 'quantity', 'unit_price', 'total_price']
+
+class StockcategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Stockcategory
+        fields = ['id', 'icon_img', 'stockcategory']
+
+class ProductcategorySerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Productcategory
+        fields =['ico_img','productcategory','stockcategory']

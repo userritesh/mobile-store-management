@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { CommonServiceTsService } from 'src/app/common.service.ts.service';
@@ -8,37 +8,52 @@ import { CommonServiceTsService } from 'src/app/common.service.ts.service';
   templateUrl: './add-items-page.component.html',
   styleUrls: ['./add-items-page.component.scss']
 })
-export class AddItemsPageComponent {
+export class AddItemsPageComponent implements OnInit {
  iconurl!: string;
 label!: string;
+category!: string;
   cardData={}
-  @Input() data:any;
+  // @Input() data:any;
+  @Input() componentApi:any;
 files: { file: File, url: string }[] = [];
-  constructor( private addCards: CommonServiceTsService, public activeModal: NgbActiveModal, private toster: ToastrService) { }
+  formData: any ={};
+  modalTitle: any;
+data: any;
+selectedCategoryId: any = null;
+titel: any;
+  listitems: any;
+
+  // parent.component.ts
+categoryList = [
+  { id: 1, name: 'Mobile' },
+  { id: 2, name: 'Accessories' },
+  { id: 3, name: 'Charger' }
+];
+
+selectedCategory: number | null = null;
+
+
+  constructor( private addCards: CommonServiceTsService, public activeModal: NgbActiveModal, private toster: ToastrService,private apiastockcategory:CommonServiceTsService) { }
  
+ngOnInit(){
+   this.apiastockcategory.getstockcategory().subscribe(list=>{
+    console.log(list)
+        this.listitems = list;
+      })}
+  
 close() {
     this.activeModal.dismiss('close'); 
   }
 
-  
 addCard() {
   const formData = new FormData();
-  formData.append('label', this.label);
+   formData.append('stockcategory',this.label);   
+  if (this.files.length > 0)formData.append('ico_img', this.files[0].file); 
 
-  if (this.files.length > 0) {
-    formData.append('icon', this.files[0].file); 
-  }
-
-  this.addCards.addDashboardCard(formData).subscribe({
-    next: (res) => {
-      console.log('Upload successful');
-      this.close();
-    },
-    error: (err) => {
-      console.error('Upload failed', err);
-    }
-  });
+  if(this.modalTitle==="Add category Cad") formData.append('productcategory', this.category);
+  this.activeModal.close(formData);
 }
+
 
 onSelect(event:any){
  

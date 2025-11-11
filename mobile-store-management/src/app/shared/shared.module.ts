@@ -22,7 +22,7 @@ import { ChartOptionsComponent } from './components/chart-options/chart-options'
 import { ReportsModule } from '../features/reports/reports.module';
 import { DatePickerComponent } from './components/date-picker/date-picker.component';
 import { ImageInputComponent } from './components/image-input/image-input.component';
-
+import { NgSelectModule } from '@ng-select/ng-select';
 
 
 @NgModule({
@@ -51,7 +51,8 @@ import { ImageInputComponent } from './components/image-input/image-input.compon
     RouterModule,
     AgGridModule,
     FormsModule,
-     NgxDropzoneModule,
+    NgxDropzoneModule,
+     NgSelectModule
 
      ],
   exports: [
@@ -62,7 +63,7 @@ import { ImageInputComponent } from './components/image-input/image-input.compon
     InputComponent,
     ButtonComponent,
     ChartOptionsComponent,
-    ReportsModule
+    ReportsModule,
     
 
   ]

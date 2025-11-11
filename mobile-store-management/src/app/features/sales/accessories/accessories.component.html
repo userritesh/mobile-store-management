@@ -4,7 +4,11 @@
     <app-card [title]="assessori.product_name" [subtitle]="assessori.detailes"
       [image]="assessori.src" [route]="'/stock/productlist'" height="180">
    </app-card>
+    
   </div>
+  <div class="plusIcon" (click)="addCard()">
+                  <img src="assets/icons/plus.svg" alt="plusIcon">
+            </div>
 </div>
 
 <div class="w-100">
