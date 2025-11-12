@@ -2,10 +2,19 @@ import { GridColumn, GridModel } from "src/app/shared/components/grid/grid-model
 import { StorageName } from "src/app/shared/enum/common-enum";
 
 
+  const Brand: GridColumn = {
+    headerName: "Brand",
+    field: "brand",
+    headerClass: "custom-column-group-cell px-0",
+    cellClass: "custom-column-group-cell px-0 ",
+    editable: false,
+    sortable: true,
+    resizable:true,
+   }
 
   const ProductName: GridColumn = {
     headerName: "Product Name",
-    field: "productName",
+    field: "name",
     headerClass: "custom-column-group-cell px-0",
     cellClass: "custom-column-group-cell px-0 ",
     editable: false,
@@ -15,7 +24,7 @@ import { StorageName } from "src/app/shared/enum/common-enum";
 
    const ProductCategory: GridColumn = {
     headerName: "Product Category",
-    field: "productCategory",
+    field: "productcategory",
     headerClass: "custom-column-group-cell px-0",
     cellClass: "custom-column-group-cell px-0 ",
     editable: false,
@@ -24,25 +33,25 @@ import { StorageName } from "src/app/shared/enum/common-enum";
    }
    const ProductPrice: GridColumn = {
     headerName: "Product Price",
-    field: "productPrice",
+    field: "price",
     headerClass: "custom-column-group-cell px-0",
     cellClass: "custom-column-group-cell px-0 ",
     editable: false,
     sortable: true,
     resizable:true,
    }
-   const ProductPurchaseDate: GridColumn = {
-    headerName: "Product Purchase Date",
-    field: "productPurchaseDate",
-    headerClass: "custom-column-group-cell px-0",
-    cellClass: "custom-column-group-cell px-0 ",
-    editable: false,
-    sortable: true,
-    resizable:true,
-   }
+  //  const ProductPurchaseDate: GridColumn = {
+  //   headerName: "Product Purchase Date",
+  //   field: "productPurchaseDate",
+  //   headerClass: "custom-column-group-cell px-0",
+  //   cellClass: "custom-column-group-cell px-0 ",
+  //   editable: false,
+  //   sortable: true,
+  //   resizable:true,
+  //  }
     const ProductImg: GridColumn = {
     headerName: "Product Img",
-    field: "productImg",
+    field: "image_url",
     headerClass: "custom-column-group-cell px-0",
     cellClass: "custom-column-group-cell px-0 ",
     editable: false,
@@ -52,10 +61,11 @@ import { StorageName } from "src/app/shared/enum/common-enum";
 
 
   export const ColDefsPurchaseFormTable: GridColumn[] = [
-   ProductName,
+   Brand,
+  ProductName,
    ProductCategory,
    ProductPrice,
-   ProductPurchaseDate,
+  //  ProductPurchaseDate,
    ProductImg,
   ];
 

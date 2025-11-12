@@ -38,7 +38,7 @@ export class CommonServiceTsService {
   }
 
   getAllProducts():Observable<any>{
-    return this.http.get(this.apiproducts)
+    return this.http.get<any>(this.apiproducts)
   }
 
   allstockcategory(data:any):Observable<any>{
