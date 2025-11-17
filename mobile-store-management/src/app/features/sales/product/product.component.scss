@@ -1,0 +1,23 @@
+.input-wrapper,
+  .input-wrapper app-input,
+  app-input {
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .preview-img {
+    object-fit: cover;
+    border-radius: 6px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  }
+
+  .app-btn-save {
+    z-index: 2;
+  }
+
+  @media (max-width: 480px) {
+    .input-wrapper app-input {
+      min-width: 0 !important;
+    }
+  }
