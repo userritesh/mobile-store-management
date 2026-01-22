@@ -20,6 +20,8 @@ class Stockcategory(models.Model):
 class Productcategory(models.Model):
     stockcategory = models.ForeignKey(Stockcategory, on_delete=models.CASCADE, related_name='productcategories')
     productcategory = models.CharField(max_length=50)
+    description = models.TextField(blank=True, null=True)
+
     ico_img = models.ImageField(upload_to='productcategory/', blank=True, null=True)
 
     def __str__(self):

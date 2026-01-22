@@ -17,6 +17,33 @@ export class CommonServiceTsService {
   private selectedProduct = new BehaviorSubject<any>(null);
 
 
+  convertToFormData(data: any): FormData {
+  const formData = new FormData();
+
+  for (const key in data) {
+    if (data.hasOwnProperty(key)) {
+      
+      // If the value is a File or Blob, append directly
+      if (data[key] instanceof File || data[key] instanceof Blob) {
+        formData.append(key, data[key]);
+      }
+
+      // If value is null or empty object → skip or set empty
+      else if (typeof data[key] === "object" && Object.keys(data[key]).length === 0) {
+        formData.append(key, "");
+      }
+
+      // Normal values (string / number)
+      else {
+        formData.append(key, data[key]);
+      }
+    }
+  }
+
+  return formData;
+}
+
+
    getSellingItems(): Observable<any> {
     return this.http.get(this.apiUrl);
   }
@@ -49,7 +76,8 @@ export class CommonServiceTsService {
     return this.http.get(this.apistockcategory)
   }
   insertUpdateproductSubcategor(data:any):Observable<any>{
-    return this.http.post(this.productSubcategor,data)
+    const newdata = this.convertToFormData(data)
+    return this.http.post(this.productSubcategor,newdata)
   }
    getproductSubcategor():Observable<any>{
     return this.http.get(this.productSubcategor)

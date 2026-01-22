@@ -9,7 +9,11 @@
     <app-input [inputType]="'text'" [inputId]="'label'" [inputName]="'label'" [(inputvalue)]="label" [inputPlaceholder]="'Enter Label'"
         [requiredField]="true" [label]="'Label'">
     </app-input>
+    
     <div *ngIf="modalTitle=='Add Product category'">
+         <app-input [inputType]="'text'" [inputId]="'description'" [inputName]="'description'" [(inputvalue)]="description"
+            [inputPlaceholder]="'Enter Description'" [label]="'Description'">
+        </app-input>
 <app-dropdown
   label="Category"
   placeholder="Select Category"
@@ -18,23 +22,20 @@
   bindValue="id"
   [(value)]="selectedCategory">
 </app-dropdown>
-
-
-
-
-
-
-
-
-        <!-- <app-input [inputType]="'text'" [inputId]="'Category'" [inputName]="'Category'" [(inputvalue)]="category"
-            [inputPlaceholder]="'Enter Label'" [requiredField]="true" [label]="'Category'">
-        </app-input> -->
     </div>
     <div  ngx-dropzone 
     [accept]="data?.isAcceptAllDoc ? '*' : 'image/jpeg,.png,.jpg,.glb,.stl'" 
-    (change)="onSelect($event)"> </div>
-    <div  *ngFor="let file of files" class="preview-image" > <img [src]="file.url" alt=""></div>
-    <h4>uploadImage</h4></div>
+    (change)="onSelect($event)"> 
+    <h4  *ngIf="files.length == 0">uploadImage</h4>
+     <div *ngIf="files.length > 0">
+  <div *ngFor="let file of files" class="preview-image">
+    <img [src]="file.url" alt="">
+  </div>
+</div>
+
+</div>
+   
+</div>
 
        <app-button class="mb-3" (buttonOutputEvent)="addCard()" [buttonType]="'button'" [tag]="'Save'"></app-button>
     </form>

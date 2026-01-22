@@ -12,13 +12,13 @@ export class AddItemsPageComponent implements OnInit {
  iconurl!: string;
 label!: string;
 category!: string;
+description!:string;
   cardData={}
-  // @Input() data:any;
+  @Input() data:any;
   @Input() componentApi:any;
 files: { file: File, url: string }[] = [];
   formData: any ={};
   modalTitle: any;
-data: any;
 selectedCategoryId: any = null;
 titel: any;
   listitems: any;
@@ -46,12 +46,22 @@ close() {
   }
 
 addCard() {
-  const formData = new FormData();
-   formData.append('stockcategory',this.label);   
-  if (this.files.length > 0)formData.append('ico_img', this.files[0].file); 
 
-  if(this.modalTitle==="Add category Cad") formData.append('productcategory', this.category);
-  this.activeModal.close(formData);
+  const labelName = this.data == 'Product' ? 'productcategory':'stockcategory' ;
+  const obj: any = {
+    [labelName]: this.label
+  };
+
+  if (this.files.length > 0) {
+    obj['ico_img'] = this.files[0].file;
+  }
+
+  if (this.modalTitle === "Add Product category") {
+    obj['stockcategory'] = this.selectedCategory;
+    obj['description'] = this.description;
+  }
+
+  this.activeModal.close(obj);
 }
 
 

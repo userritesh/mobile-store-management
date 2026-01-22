@@ -57,7 +57,7 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = [
     
     "http://localhost:4200",
-    "http://localhost:63455",
+    "http://localhost:62953",
 ]
 
 ROOT_URLCONF = 'mobile_mgmt.urls'
