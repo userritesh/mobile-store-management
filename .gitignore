@@ -1,0 +1,18 @@
+# Angular
+node_modules/
+dist/
+.angular/
+
+# Editor
+.vscode/
+
+# Logs
+*.log
+
+# Backup files
+*.bak
+
+# Python / Django
+__pycache__/
+*.pyc
+db.sqlite3

@@ -1,0 +1,26 @@
+<div class="comment-box"
+     (dragover)="onDragOver($event)"
+     (drop)="onDrop($event)">
+
+  <div class="tabs">
+    <button (click)="switchTab('write')" [class.active]="activeTab === 'write'">
+      Write
+    </button>
+    <button (click)="switchTab('preview')" [class.active]="activeTab === 'preview'">
+      Preview
+    </button>
+  </div>
+
+  <textarea
+    *ngIf="activeTab === 'write'"
+    [(ngModel)]="commentText"
+    placeholder="Write here or drag image...">
+  </textarea>
+
+  <div
+    *ngIf="activeTab === 'preview'"
+    class="preview"
+    [innerHTML]="previewHtml">
+  </div>
+
+</div>

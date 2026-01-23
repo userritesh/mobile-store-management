@@ -1,0 +1,31 @@
+[33mcommit 18abec64dfa5d4d24bb1987ecab0c538ffb4dc99[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mrecovered-branch[m[33m)[m
+Author: RITESH MESHRAM <meshramritesh98@gmail.com>
+Date:   Sat Oct 11 16:07:32 2025 +0530
+
+    Add FontAwesome and update UI assets and modules
+    
+    Integrated @fortawesome/fontawesome-free into the project and included its CSS in angular.json. Added new icon and image assets for UI enhancements. Updated routing and module files for sales and stock features, and made various improvements to dashboard, sales, stock, and store components to support new UI elements and navigation.
+
+[33mcommit 4a60d58f9fbedca7c0cf7f2c7aeea2817687417d[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Author: userritesh <ritesh.meshram@thinkersteps.com>
+Date:   Mon Oct 6 10:07:33 2025 +0530
+
+    add
+
+[33mcommit 0eaf3ae44ee152081a4b3e70cb344279c3df4046[m[33m ([m[1;31morigin/card-and-data-correction[m[33m, [m[1;32mcard-and-data-correction[m[33m)[m
+Author: userritesh <ritesh.meshram@thinkersteps.com>
+Date:   Sat Oct 4 15:44:04 2025 +0530
+
+    card and data setting and set path and create service
+
+[33mcommit 29cb47ec0c2704c3fcddd67d9d9755c27263723e[m[33m ([m[1;31mupstream/main[m[33m, [m[1;31mupstream/HEAD[m[33m)[m
+Author: userritesh <ritesh.meshram@thinkersteps.com>
+Date:   Sun Sep 28 23:33:06 2025 +0530
+
+    Initial commit - Mobile Store Management project
+
+[33mcommit 1950234c85571790f0a59f1b3c2c8a6e249a91ca[m
+Author: userritesh <ritesh.meshram@thinkersteps.com>
+Date:   Wed Sep 24 10:49:00 2025 +0530
+
+    initial commit
