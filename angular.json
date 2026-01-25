@@ -29,12 +29,23 @@
               "src/favicon.ico",
               "src/assets","src/img_ico"
             ],
+<<<<<<< HEAD
             "styles": [
              "node_modules/bootstrap/dist/css/bootstrap.min.css",
              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
              "node_modules/@ng-select/ng-select/themes/default.theme.css",
             "src/styles.scss"
             ],
+=======
+  "styles": [
+  "node_modules/bootstrap/dist/css/bootstrap.min.css",
+  "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+  "node_modules/ag-grid-community/styles/ag-grid.css",
+  "node_modules/ag-grid-community/styles/ag-theme-alpine.css",
+  "node_modules/@ng-select/ng-select/themes/default.theme.css",
+  "src/styles.scss"
+],
+>>>>>>> 8de5bce2ecef697cfba8aef67f117d72a507b0f8
             "scripts": [ "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"]
           },
           "configurations": {

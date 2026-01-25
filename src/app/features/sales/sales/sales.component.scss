@@ -1,0 +1,84 @@
+.back-container {
+  display: flex;                
+  justify-content:end;    
+  margin-bottom: 0;               
+  position: fixed;               
+  top: 85px;                   
+  right: 45px;                       
+//   margin: 0.75rem;                
+  z-index: 1;                  
+}
+
+// .sales_main{
+//   overflow-x: hidden;
+//   overflow-y: auto;
+// }
+.route_space{
+ height: calc(100vh - 140px);
+ overflow-y: auto;
+}
+.plusIcon {
+  position: absolute;   /* position relative to parent */
+  top: 635px;            /* distance from top */
+  right: 65px;          /* distance from right */
+  z-index: 10;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color:blue;  /* blue background */
+  border-radius: 50%;  
+  border: 2px solid white;        /* circular button */
+  color: white;                /* plus icon color if using currentColor */
+  font-size: 24px;             /* icon size */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+
+/* Skeleton Shine Effect */
+.shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.shine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, rgba(70,70,70,0) 0%, rgba(255,255,255,0.4) 45%, rgba(255,255,255,0.4) 55%, rgba(70,70,70,0) 100%);
+  transform: translateX(-120%);
+  animation: shimmer 1.5s infinite;
+}
+
+/* Skeleton Blocks */
+.skeleton {
+  background-color: #f0efef;
+  border-radius: 4px;
+}
+
+.skeleton-img {
+  width: 120px;
+  height: 120px;
+}
+
+.skeleton-header {
+  width: 60%;
+  height: 20px;
+}
+
+.skeleton-text {
+  width: 40%;
+  height: 18px;
+  margin-top: 5px;
+}
+
+/* Animation Keyframes */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}

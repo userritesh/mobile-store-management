@@ -1,0 +1,59 @@
+<div class="invoice-container" >
+  <div class="invoice-card shadow p-4 bg-white rounded-3">
+    <h2 class="text-center text-primary mb-3">Invoice</h2>
+    <hr />
+
+    <!-- Company & Invoice Info -->
+    <div class="d-flex justify-content-between align-items-start mb-4">
+      <div>
+        <h5 class="mb-1">Mobile Store Management</h5>
+        <p class="mb-0">123 Main Street, Pune, India</p>
+        <p class="mb-0">Email: info@mobilestore.com</p>
+      </div>
+      <div class="text-end " *ngIf="selectedProduct">
+        <p class="mb-1"><strong>Invoice #:</strong> INV-{{ selectedProduct.id || '001' }}</p>
+        <p class="mb-1"><strong>Date:</strong> {{ today | date: 'dd/MM/yyyy' }}</p>
+      </div>
+    </div>
+
+    <!-- Product Details Table -->
+    <table class="table table-bordered align-middle" *ngIf="selectedProduct; else noProduct">
+      <thead class="table-light">
+        <tr>
+          <th>Product Name</th>
+          <th>Description</th>
+          <th>Category</th>
+          <th class="text-end">Price (₹)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ selectedProduct.productName || 'N/A' }}</td>
+          <td>{{ selectedProduct.description || '-' }}</td>
+          <td>{{ selectedProduct.category }}</td>
+          <td class="text-end">{{ selectedProduct.price | number: '1.2-2' }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Total Section -->
+    <div class="text-end mt-3">
+      <p class="fw-bold fs-5">Total: ₹{{ selectedProduct.price | number: '1.2-2' }}</p>
+    </div>
+
+    <hr />
+
+    <!-- Footer -->
+    <div class="text-center text-muted mt-4">
+      <small>Thank you for your purchase!</small>
+    </div>
+  </div>
+</div>
+
+<!-- No Product Template -->
+<ng-template #noProduct>
+  <div class="text-center text-muted mt-5">
+    <h5>No product selected</h5>
+    <p>Please go back and select a product to view invoice.</p>
+  </div>
+</ng-template>

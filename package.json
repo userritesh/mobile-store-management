@@ -10,28 +10,61 @@
   },
   "private": true,
   "dependencies": {
+<<<<<<< HEAD
     "@angular/animations": "^16.2.0",
     "@angular/common": "^16.2.0",
     "@angular/compiler": "^16.2.0",
     "@angular/core": "^16.2.0",
     "@angular/forms": "^16.2.0",
+=======
+    "@ag-grid-community/angular": "^32.3.9",
+    "@ag-grid-community/client-side-row-model": "^32.3.9",
+    "@ag-grid-community/core": "^32.3.9",
+    "@angular/animations": "^16.2.12",
+    "@angular/common": "^16.2.0",
+    "@angular/compiler": "^16.2.0",
+    "@angular/core": "^16.2.0",
+    "@angular/forms": "^16.2.12",
+>>>>>>> 8de5bce2ecef697cfba8aef67f117d72a507b0f8
     "@angular/platform-browser": "^16.2.0",
     "@angular/platform-browser-dynamic": "^16.2.0",
     "@angular/router": "^16.2.0",
     "@fortawesome/fontawesome-free": "^7.1.0",
+<<<<<<< HEAD
     "ag-grid-angular": "^32.3.3",
     "ag-grid-community": "^32.3.3",
     "bootstrap": "^5.3.8",
     "bootstrap-icons": "^1.13.1",
+=======
+    "@ng-bootstrap/ng-bootstrap": "^15.1.2",
+    "@ng-select/ng-select": "^11.2.0",
+    "@popperjs/core": "^2.11.8",
+    "ag-grid-angular": "^32.3.9",
+    "ag-grid-community": "^32.3.9",
+    "bootstrap": "^5.3.8",
+    "bootstrap-icons": "^1.13.1",
+    "chart.js": "^4.3.0",
+    "marked": "^17.0.1",
+    "ngx-dropzone": "^3.1.0",
+    "ngx-toastr": "^19.1.0",
+>>>>>>> 8de5bce2ecef697cfba8aef67f117d72a507b0f8
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"
   },
   "devDependencies": {
+<<<<<<< HEAD
     "@angular-devkit/build-angular": "^16.2.16",
     "@angular/cli": "^16.2.16",
     "@angular/compiler-cli": "^16.2.0",
     "@types/jasmine": "~4.3.0",
+=======
+    "@angular-devkit/build-angular": "^16.2.12",
+    "@angular/cli": "^16.2.12",
+    "@angular/compiler-cli": "^16.2.0",
+    "@types/jasmine": "~4.3.0",
+    "@types/marked": "^5.0.2",
+>>>>>>> 8de5bce2ecef697cfba8aef67f117d72a507b0f8
     "jasmine-core": "~4.6.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
