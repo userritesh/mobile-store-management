@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { StockListComponent } from './pages/stock-list/stock-list.component';
 import { AccessoriesComponent } from '../sales/accessories/accessories.component';
 import { ReportDashboardComponent } from '../reports/pages/report-dashboard/report-dashboard.component';
+import { PurchaseListComponent } from './pages/purchase-list/purchase-list.component';
 
 const routes: Routes = [
   { path: '', component: StockListComponent,      
@@ -10,6 +11,7 @@ const routes: Routes = [
    { path: 'accessories', component: AccessoriesComponent },
   { path: 'productlist', loadChildren: () => import('../store/store.module').then(m => m.StoreModule)},
   { path: 'reports', component: ReportDashboardComponent },
+  { path: 'stockCategory', component: PurchaseListComponent },
     ]
   },
 

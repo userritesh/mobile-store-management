@@ -17,9 +17,9 @@ export class AccessoriesComponent {
   addCard() {
     const data = 'Product'
     this.popup.openModalPopup(AddItemsPageComponent, data, 'Add Product category', ModalPopupSize.MD, '', false, true).then(res => {
-      this.productSubcategor.insertUpdateproductSubcategor(res).subscribe(res => {
+      this.productSubcategor.insertUpdateProductSubcategory(res).subscribe(res => {
         if (res) {
-          this.productSubcategor.getproductSubcategor().subscribe(res => {
+          this.productSubcategor.getProductSubcategory().subscribe(res => {
             if (res) {
               console.log(res)
             }
@@ -31,7 +31,7 @@ export class AccessoriesComponent {
   }
 
   ngOnInit() {
-    this.productSubcategor.getproductSubcategor().subscribe(res => {
+    this.productSubcategor.getProductSubcategory().subscribe(res => {
       if (res) {
         this.cardDetailes = res;
         console.log(this.cardDetailes)

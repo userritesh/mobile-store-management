@@ -15,6 +15,9 @@ import { CommonServiceTsService } from 'src/app/common.service.ts.service';
 })
 export class StockListComponent {
   activeTabId: SalesTab | null = null;
+  tabs:any;   
+  path!:string;
+
 
   constructor(private location: Location, private router: Router,public popup:CommonPopupModelService,private apiastockcategory:CommonServiceTsService) {
     this.router.events.pipe(
@@ -30,11 +33,12 @@ export class StockListComponent {
     });
   }
 
-  tabs = [
-    { label: 'Recharge', path: 'recharge', img_path: "assets/img_icon/No_product_img.png" },
-    { label: 'Phones', path: 'product', img_path: "assets/img_icon/Phones.webp" },
-    { label: 'Accessories', path: 'accessories', img_path: "assets/img_icon/phone_accessories.jpg" }
-  ];
+  // this.tabs = [];   
+  //  { label: 'Recharge', path: 'recharge', img_path: "assets/img_icon/No_product_img.png" },
+  //   { label: 'Phones', path: 'product', img_path: "assets/img_icon/Phones.webp" },
+  //   { label: 'Accessories', path: 'accessories', img_path: "assets/img_icon/phone_accessories.jpg" }
+
+
   showflag: boolean = false
   bakflag: boolean = false
  onInit() {
@@ -45,6 +49,11 @@ export class StockListComponent {
   //     break;
   // }
     // ************** CHANGED (single expression control) **************
+     this.apiastockcategory.getstockcategory().subscribe(list=>{
+          this.tabs = list
+          console.log(this.tabs);
+          
+        })
    this.showflag = this.activeTabId === SalesTab.Invoice;
    
 }
@@ -79,7 +88,8 @@ export class StockListComponent {
       this.apiastockcategory.allstockcategory(resultData).subscribe(res=>{
        if(res.isSuccess){
         this.apiastockcategory.getstockcategory().subscribe(list=>{
-          console.log(list);
+          this.tabs = list
+          console.log(this.tabs);
           
         })
        }

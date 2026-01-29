@@ -7,7 +7,7 @@ router.register(r'dashboard', DashboardCardViewSet, basename='dashboard')
 router.register(r'products', ProductViewSet, basename='products')
 router.register(r'selling-items', SellingItemViewSet, basename='selling-items')
 router.register(r'stockcategory', StockcategoryViewSet, basename='stockcategory')
-router.register(r'productSubcategor', ProductSubcategoryViewSet, basename='productSubcategor')
+router.register(r'productSubcategory', ProductSubcategoryViewSet, basename='productSubcategory')
 
 urlpatterns = [
     path('api/', include(router.urls)),
