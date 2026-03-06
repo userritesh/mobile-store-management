@@ -45,25 +45,33 @@ close() {
     this.activeModal.dismiss('close'); 
   }
 
-addCard() {
+  addCard() {
+  let obj: any = {};
+  let labelName!: string;
 
-  const labelName = this.data == 'Product' ? 'productcategory':'stockcategory' ;
-  const obj: any = {
-    [labelName]: this.label
-  };
+  // Determine labelName based on modalTitle
+  if (this.modalTitle === "Add saling Catogary") {
+    labelName = "salingcategory";
+  } else  {
+  labelName = this.data === "Product" ? "productcategory" : "stockcategory";   
+  }
+  
+  if (this.modalTitle === "Add Product category"){
+     obj['stockcategory'] = this.selectedCategory;
+    obj['description'] = this.description;
+  }
 
+  // Add the label dynamically
+  obj[labelName] = this.label;
+
+  // Add image file if available
   if (this.files.length > 0) {
     obj['ico_img'] = this.files[0].file;
   }
 
-  if (this.modalTitle === "Add Product category") {
-    obj['stockcategory'] = this.selectedCategory;
-    obj['description'] = this.description;
-  }
-
+  // Close modal and pass object
   this.activeModal.close(obj);
 }
-
 
 onSelect(event:any){
  
