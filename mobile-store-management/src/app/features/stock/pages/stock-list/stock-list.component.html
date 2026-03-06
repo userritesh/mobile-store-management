@@ -1,9 +1,9 @@
 <div class="sales_main">
     <div class="position-relative">
         <div *ngIf="!showflag" class="gap-2 row">
-            <div *ngFor="let tab of tabs" class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 "
+            <div *ngFor="let tab of tabs" class="card_h-250px col-12 col-xxl-2 col-sm-6 col-xl-3 col-md-4 col-lg-3 mb-4"
                 style="display: flex; gap:4.5rem">
-                <div class="card shadow-lg rounded-3 bg-white " style="width: 400px;height: 373px; cursor: pointer;"
+                <div class="card shadow-lg rounded-3 bg-white w-100 h-100"
                     [routerLink]="['stockCategory']" (click)="show()">
                     <img [src]='tab.icon_img ' class="h-75 w-100">
                     <h2 class=" text-center text-primary">{{tab.stockcategory}}</h2>

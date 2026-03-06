@@ -68,9 +68,20 @@ export class CommonServiceTsService {
     return this.http.get<any>(this.apiproducts)
   }
 
-  allstockcategory(data:any):Observable<any>{
-    return this.http.post(this.apistockcategory,data)
-  }
+  // allstockcategory(data:any):Observable<any>{
+  //   return this.http.post(this.apistockcategory,data)
+  // }
+
+  allstockcategory(data: any): Observable<any> {
+
+ const formData = new FormData();
+formData.append('icon_img',data.ico_img ); 
+formData.append('stockcategory',data.stockcategory);
+
+  return this.http.post(this.apistockcategory, formData);
+}
+
+
 
    getstockcategory():Observable<any>{
     return this.http.get(this.apistockcategory)

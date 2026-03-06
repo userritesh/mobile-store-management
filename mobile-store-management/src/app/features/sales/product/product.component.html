@@ -74,6 +74,13 @@
                 [label]="'Product Category'"
                 [(inputvalue)]="selectedProduct.productcategory">
               </app-input>
+              <app-dropdown                
+                [value]=""
+                [placeholder]="''"
+                (searchable)="true"
+                [bindValue]="selectedProduct.productcategory"
+                [bindLabel]="'Product Category'">
+              </app-dropdown>             
             </div>
           </div>
 
