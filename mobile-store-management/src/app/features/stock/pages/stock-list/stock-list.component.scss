@@ -1,0 +1,40 @@
+.back-container {
+  display: flex;                
+  justify-content:end;    
+  margin-bottom: 0;               
+  position: fixed;               
+  top: 85px;                   
+  right: 45px;                       
+//   margin: 0.75rem;                
+  z-index: 1;                  
+}
+
+// .sales_main{
+//   overflow-x: hidden;
+//   overflow-y: auto;
+// }
+.route_space{
+ height: calc(100vh - 140px);
+ overflow-y: auto;
+}
+
+.plusIcon{
+  width: 40px;
+  height: 40px;
+  background-color: blue;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  position: fixed;
+  z-index: 1;
+  top: 82%;
+  right: 10%;
+  cursor: pointer;
+  border:2px solid white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+.card_h-250px{
+  height: 250px !important;
+}

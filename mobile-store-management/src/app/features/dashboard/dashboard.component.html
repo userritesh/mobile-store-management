@@ -1,0 +1,73 @@
+<div class="container mt-4">
+  <h2 class="mb-4">📊 Dashboard</h2>
+
+  <div class="row g-4" >
+    <!-- Sales Card -->
+    <div class="col-md-3"  (click)="topage('sales')">
+      <div class="card shadow-sm border-0 text-center p-3">
+        <h5>Sales</h5>
+        <p class="display-6 text-success">120</p>
+      </div>
+    </div>
+
+    <!-- Purchases Card -->
+    <div class="col-md-3"(click)="topage('purchase')">
+      <div class="card shadow-sm border-0 text-center p-3">
+        <h5>Purchases</h5>
+        <p class="display-6 text-primary">85</p>
+      </div>
+    </div>
+
+    <!-- Inventory Card -->
+    <div class="col-md-3" (click)="topage('stock')">
+      <div class="card shadow-sm border-0 text-center p-3">
+        <h5>Inventory</h5>
+        <p class="display-6 text-warning">340</p>
+      </div>
+    </div>
+
+    <!-- Reports Card -->
+    <div class="col-md-3" (click)="topage('reports')">
+      <div class="card shadow-sm border-0 text-center p-3">
+        <h5>Reports</h5>
+        <p class="display-6 text-danger">📑</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recent Sales Table -->
+  <div class="card shadow-sm border-0 mt-5">
+    <div class="card-header bg-light">
+      <h5 class="mb-0">Recent Sales</h5>
+    </div>
+    <div class="card-body p-0">
+      <table class="table table-hover mb-0">
+        <thead class="table-light">
+          <tr>
+            <th>#</th>
+            <th>Customer</th>
+            <th>Mobile</th>
+            <th>Amount</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Amit Sharma</td>
+            <td>iPhone 14</td>
+            <td>₹78,000</td>
+            <td>23 Sep 2025</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Neha Gupta</td>
+            <td>Samsung S23</td>
+            <td>₹65,000</td>
+            <td>22 Sep 2025</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
