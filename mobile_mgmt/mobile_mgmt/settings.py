@@ -58,7 +58,7 @@ CORS_ALLOWED_ORIGINS = [
     
     "http://localhost:4200",
     "http://localhost:4500",
-    "http://localhost:51150",
+    "http://localhost:58940",
 ]
 
 ROOT_URLCONF = 'mobile_mgmt.urls'
