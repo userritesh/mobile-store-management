@@ -6,7 +6,7 @@ from .models import DashboardCard, Product, Productcategory, SellingItem,Stockca
 from .serializers import DashboardCardSerializer, ProductSerializer, ProductcategorySerializer, SellingItemSerializer, StockcategorySerializer
 from rest_framework.response import Response
 from rest_framework import status
-
+from rest_framework.parsers import MultiPartParser, FormParser
 
 
 # API for dashboard cards
@@ -52,6 +52,7 @@ class SellingItemViewSet(viewsets.ModelViewSet):
 class StockcategoryViewSet(viewsets.ModelViewSet):
     queryset = Stockcategory.objects.all()
     serializer_class =StockcategorySerializer
+    parser_classes = (MultiPartParser, FormParser)
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
