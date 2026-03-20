@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Target modal content directly */
+.modal-content {
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  clip-path: inset(0 0 0 0 round 12px) !important;
+  max-height: 90vh;
+}
+
+.modal-body {
+  overflow: auto;
+  padding: 0;
+}

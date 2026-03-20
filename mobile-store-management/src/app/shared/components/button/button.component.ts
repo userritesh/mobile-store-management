@@ -8,7 +8,7 @@ import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@
 })
 export class ButtonComponent {
   @ViewChild('myButton') myButton!: ElementRef;
-  @Input() buttonClass!:string;
+  @Input() buttonClass!:any;
   @Input() buttonType!:string;
   @Input() ngClass: string | string[] | { [klass: string]: any } = '';
   @Input() disabled :boolean=false;

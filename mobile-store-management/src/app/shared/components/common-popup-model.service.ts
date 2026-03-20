@@ -14,7 +14,7 @@ export class CommonPopupModelService {
     data: any,
     title: string,
     popupSize: string = ModalPopupSize.LG,
-    windowClass: string = "",
+    windowClass: string = "popup-modal",
     fullscreen?: boolean,
     centered?: boolean
   ): Promise<any> {

@@ -1,14 +1,15 @@
 .popupModal{
-
     align-items: center;
     justify-content: center;
     display: flex;
     flex-direction: column;
+    overflow: hidden !important;
+    // border-radius: 12px;
 }
 
 .preview-image {
-  width: 200px;
-  height: 200px;
+  // width: 200px;
+  // height: 200px;
   overflow: hidden;       /* hides anything outside the box */
   border: 1px solid #ccc; /* optional border for visibility */
   margin: 10px;
@@ -22,4 +23,46 @@
 
 .form-control, .ng-select {
     border-radius: 6px;
+}
+
+:host ::ng-deep .buttoncss {
+  height: 60px;
+  width: 60px;
+  font-size: large;
+  color: rgb(15, 15, 15);
+  border: none !important;
+  border-radius: 0;
+  padding: 0 !important;
+  background-color: white;
+  outline: none !important;
+  box-shadow: none !important;
+  appearance: none;
+  -webkit-appearance: none;
+
+  &:hover {
+    color: white;
+    background-color: red;
+  }
+
+  &:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  &:active {
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  &:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+}
+
+.uploadImage{
+  width: 200px;
+  height: 200px;
 }
