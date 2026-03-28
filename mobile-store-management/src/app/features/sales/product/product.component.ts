@@ -39,7 +39,7 @@ constructor(private sellingService:CommonServiceTsService){}
 
 
 fileSelected(files:any){
-  const newFile =files[0]?.file
+  const newFile =files?.addedFiles[0]
   this.image = newFile
   this.preview = URL.createObjectURL(this.image )
   const reader = new FileReader();
@@ -63,9 +63,10 @@ fileSelected(files:any){
       }})
   }
   
-  cancel(){
-     this.preview =null
-     this.image = null
-  }
+  cancel(event: Event) {
+  event.stopPropagation();
+  this.preview = null;
+  this.image = null;
+}
   
 }

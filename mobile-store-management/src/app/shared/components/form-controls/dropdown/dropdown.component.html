@@ -1,10 +1,9 @@
 <div class="form-group d-flex gap-2 w-100">
-  <label *ngIf="label" class="text-primary">{{ label }}</label>
+  <label *ngIf="bindLabel" class="text-primary fw-semibold" [style.width]="width">{{bindLabel}}</label>
 
   <ng-select 
-  class="border pb-2"
+class="text-primary"
     [items]="items"
-    [bindLabel]="bindLabel"
     [bindValue]="bindValue"
     [searchable]="searchable"
     [clearable]="true"
