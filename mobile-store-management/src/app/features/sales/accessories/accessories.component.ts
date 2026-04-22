@@ -11,6 +11,8 @@ import { CommonPopupModelService } from 'src/app/shared/components/common-popup-
 })
 export class AccessoriesComponent {
   cardDetailes: any = {};
+  copyData: any;
+  searchValues: any;
 
   constructor(public popup: CommonPopupModelService, private productSubcategor: CommonServiceTsService) { }
 
@@ -34,9 +36,22 @@ export class AccessoriesComponent {
     this.productSubcategor.getProductSubcategory().subscribe(res => {
       if (res) {
         this.cardDetailes = res;
-        console.log(this.cardDetailes)
+        this.copyData = structuredClone(this.cardDetailes)
       }
     })
+  }
+
+  onSearch(searchText: string) {
+    if (!searchText) {
+      this.cardDetailes = this.copyData;
+      return;
+    }
+    this.searchValues = this.copyData.filter((items: any) => {
+      const value = searchText.replace(/[^a-zA-Z0-9]/g, '')
+      const itemsValue = items.productcategory.replace(/[^a-zA-Z0-9]/g, '')
+      return itemsValue.includes(value)
+    })
+    this.cardDetailes = this.searchValues.length ? this.searchValues : this.copyData
   }
 
 }

@@ -1,10 +1,16 @@
 
-<div class="row rounded-2xl p-4 bg-white h-100">
-  <div *ngFor="let assessori of cardDetailes" class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+<div class="row rounded-2xl p-4 pt-1 mt-3 bg-white h-100 d-flex flex-column">
+  <div class="col-6 mb-3">
+    <app-search (searchValue)="onSearch($event)"></app-search>
+  </div>
+  <hr>
+  <div class="d-flex mt-4">
+  <div *ngFor="let assessori of cardDetailes" class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 ">
     <app-card [title]="assessori.productcategory" [subtitle]="assessori.description"
       [image]="assessori.ico_img" [route]="'/stock/productlist'" [id]="assessori.stockcategory" height="180">
    </app-card>
     
+  </div>
   </div>
   <div class="plusIcon" (click)="addCard()">
                   <img src="assets/icons/plus.svg" alt="plusIcon">
