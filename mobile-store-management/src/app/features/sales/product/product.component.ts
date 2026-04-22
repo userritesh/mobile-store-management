@@ -13,27 +13,49 @@ export class ProductComponent {
   todayDate = new Date();
   agGridDataModel!: GridModel;
   selectedProduct:any = {};
+  productcategory!:string;
   image:any;
   preview:any
   imageBase64: any;
   resData: any;
+  dropdowndata: any;
 
 constructor(private sellingService:CommonServiceTsService){}
 
  ngOnInit(): void {
    this.agGridDataModel = AgGridDataModelPurchaseForm; 
+   this.getAllCategory();
    this.getAllProduct();
   }
 
-
-  getAllProduct(){
-    this.sellingService.getAllProducts().subscribe({
+getAllCategory(){
+  this.sellingService.getcategoryDropdown().subscribe({
      next: (res) => {
-       this.resData = res;
+         this.dropdowndata = res;
      }, error(err) {
        console.error(err)
      }
    });
+}
+
+// getProductSubcategory(){
+//   this.sellingService.getProductSubcategory().subscribe({
+//      next: (res) => {
+//          this.dropdowndata = res;
+//      }, error(err) {
+//        console.error(err)
+//      }
+//    });
+// }
+
+  getAllProduct(){
+      this.sellingService.getAllProducts().subscribe({
+      next: (res) => {
+        this.resData = res;
+      }, error(err) {
+        console.error(err)
+      }
+    });
   }
 
 
@@ -53,7 +75,8 @@ fileSelected(files:any){
 
   onSave(){
     this.selectedProduct ={ ...this.selectedProduct,image_src: this.imageBase64   }
-        this.sellingService.insertUpdateProducts(this.selectedProduct).subscribe({next:(res)=>{
+        
+    this.sellingService.insertUpdateProducts(this.selectedProduct).subscribe({next:(res)=>{
          if(res.isSuccess){
           this.selectedProduct= {};
           this.getAllProduct();
@@ -68,5 +91,11 @@ fileSelected(files:any){
   this.preview = null;
   this.image = null;
 }
+
+
   
 }
+  function getProductSubcategory() {
+    throw new Error('Function not implemented.');
+  }
+

@@ -14,8 +14,15 @@
               </div>
       
               <div class="col-12 col-md-4">
-                <app-dropdown class="col-3" [placeholder]="''" [width]="'182px'" (searchable)="true"
-                  [bindValue]="selectedProduct.productcategory" [bindLabel]="'Product Category'">
+                <app-dropdown class="col-3"
+                  [placeholder]="''"
+                  [width]="'182px'"
+                  [searchable]="true"
+                  bindLabel="productcategory"
+                  bindValue="id"
+                  [items]="dropdowndata"
+                  [(value)]="selectedProduct.productcategory"
+                  >
                 </app-dropdown>
               </div>
       

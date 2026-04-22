@@ -7,6 +7,7 @@ from .serializers import DashboardCardSerializer, ProductSerializer, Productcate
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.decorators import action
 
 
 # API for dashboard cards
@@ -37,6 +38,7 @@ class ProductViewSet(viewsets.ModelViewSet):
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer)
 
+   
         return Response({
             "isSuccess": True,
             "message": "Product updated successfully",
@@ -68,3 +70,15 @@ class StockcategoryViewSet(viewsets.ModelViewSet):
 class ProductSubcategoryViewSet(viewsets.ModelViewSet):
     queryset = Productcategory.objects.all()
     serializer_class = ProductcategorySerializer
+
+    @action(detail=False, methods=['get'])
+    def categories(self, request):
+        categories = Productcategory.objects.values_list('productcategory', flat=True).distinct()
+
+        result = []
+        for i, cat in enumerate(categories):
+            result.append({
+                "id": i + 1,
+                "productcategory": cat
+            })
+        return Response(result, status=status.HTTP_200_OK)

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ItemsList } from '@ng-select/ng-select/lib/items-list';
+import { filter } from 'rxjs';
 import { CommonServiceTsService } from 'src/app/common.service.ts.service';
 import { ModalPopupSize } from 'src/app/shared/common-enum/common-enum.module';
 import { AddItemsPageComponent } from 'src/app/shared/components/add-items-page/add-items-page.component';
@@ -34,6 +36,7 @@ export class AccessoriesComponent {
     this.productSubcategor.getProductSubcategory().subscribe(res => {
       if (res) {
         this.cardDetailes = res;
+        // this.cardDetailes = res.filter((ItemsList: any)=>ItemsList.stockcategory == res.productcategory )
         console.log(this.cardDetailes)
       }
     })

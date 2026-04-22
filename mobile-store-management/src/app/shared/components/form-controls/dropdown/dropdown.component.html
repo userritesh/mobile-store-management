@@ -2,16 +2,17 @@
   <label *ngIf="bindLabel" class="text-primary fw-semibold" [style.width]="width">{{bindLabel}}</label>
 
   <ng-select 
-class="text-primary"
+    class="text-primary"
     [items]="items"
+    [bindLabel]="bindLabel"
     [bindValue]="bindValue"
     [searchable]="searchable"
-    [clearable]="true"
+    [clearable]="clearable"
     [placeholder]="placeholder"
     [(ngModel)]="value"
     [disabled]="disabled"
     (open)="onOpen()"
     (close)="onClose()"
-    (change)="onChange($event)">
+    (ngModelChange)="onChange($event)">
   </ng-select>
 </div>

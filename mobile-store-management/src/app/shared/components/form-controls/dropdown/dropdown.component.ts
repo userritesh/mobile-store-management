@@ -10,25 +10,26 @@ export class DropdownComponent {
   @Input() placeholder: string = 'Select';
   @Input() items: any[] = [];
   @Input() bindLabel: string = 'name';
-  @Input() width!: string ;
   @Input() bindValue: string = 'id';
+  @Input() width?: string;
   @Input() value: any = null;
   @Input() disabled: boolean = false;
+  @Input() searchable: boolean = false;
+  @Input() clearable: boolean = true;
 
   @Output() valueChange = new EventEmitter<any>();
-
-  // toggle search visibility
-  searchable: boolean = false;
+  @Output() open = new EventEmitter<void>();
+  @Output() close = new EventEmitter<void>();
 
   onOpen() {
-    this.searchable = true;
+    this.open.emit();
   }
 
   onClose() {
-    this.searchable = false;
+    this.close.emit();
   }
 
   onChange(event: any) {
-    this.valueChange.emit(this.value);
+    this.valueChange.emit(event);
   }
 }
