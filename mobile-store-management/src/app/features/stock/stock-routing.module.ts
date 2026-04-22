@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: '', component: StockListComponent,      
     children:[
    { path: 'accessories', component: AccessoriesComponent },
-  { path: 'productlist', loadChildren: () => import('../store/store.module').then(m => m.StoreModule)},
+  { path: 'productlist/:id', loadChildren: () => import('../store/store.module').then(m => m.StoreModule)},
   { path: 'reports', component: ReportDashboardComponent },
   { path: 'stockCategory', component: PurchaseListComponent },
     ]

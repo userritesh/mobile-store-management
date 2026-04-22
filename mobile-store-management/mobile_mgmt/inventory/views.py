@@ -44,7 +44,7 @@ class ProductViewSet(viewsets.ModelViewSet):
             "message": "Product updated successfully",
             "data": serializer.data
         }, status=status.HTTP_200_OK)
-
+    
 
 # API for selling items (grid data)
 class SellingItemViewSet(viewsets.ModelViewSet):

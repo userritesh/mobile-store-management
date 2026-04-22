@@ -23,6 +23,7 @@ import { ReportsModule } from '../features/reports/reports.module';
 import { DatePickerComponent } from './components/date-picker/date-picker.component';
 import { ImageInputComponent } from './components/image-input/image-input.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { SearchComponent } from './components/search/search.component';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     ChartOptionsComponent,
     DatePickerComponent,
     ImageInputComponent,
+    SearchComponent,
     
   ],
   imports: [
@@ -64,7 +66,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     ButtonComponent,
     ChartOptionsComponent,
     ReportsModule,
-    
+    DropdownComponent,
+    SearchComponent
 
   ]
 })

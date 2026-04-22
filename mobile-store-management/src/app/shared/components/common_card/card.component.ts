@@ -16,11 +16,12 @@ export class CardComponent {
   @Input() image?: string;
   @Input() height?: string;
   @Input() route?: string;
+  @Input() id?: any;
 
   navigate() {
     if (this.route) {
       this.storageService.setItem(Storagekey.SelectedProductTitle, this.title, true);
-      this.router.navigate([this.route]);
+      this.router.navigate([this.route, this.id]);
     }
   }
 }

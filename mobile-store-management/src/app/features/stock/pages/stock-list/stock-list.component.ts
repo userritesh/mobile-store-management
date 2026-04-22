@@ -17,6 +17,8 @@ export class StockListComponent {
   activeTabId: SalesTab | null = null;
   tabs:any;   
   path!:string;
+  searchValues: any;
+  copyData: any;
 
 
   constructor(private location: Location, private router: Router,public popup:CommonPopupModelService,private apiastockcategory:CommonServiceTsService) {
@@ -51,6 +53,7 @@ export class StockListComponent {
     // ************** CHANGED (single expression control) **************
      this.apiastockcategory.getstockcategory().subscribe(list=>{
           this.tabs = list
+          this.copyData =  structuredClone(this.tabs  )
           console.log(this.tabs);
           
         })
@@ -98,7 +101,14 @@ export class StockListComponent {
   })
 }
 
-  
+  onSearch(searchText: string) {
+    if (!searchText){
+       this.tabs = this.copyData; 
+       return;
+    }
+    this.searchValues = this.copyData.filter((items: any) => { return items.stockcategory.toLowerCase().includes(searchText.toLowerCase()) })
+    this.searchValues ? this.tabs = this.searchValues : this.tabs = this.copyData
+  }
   
  }
 
