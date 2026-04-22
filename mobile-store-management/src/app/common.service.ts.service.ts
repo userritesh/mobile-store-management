@@ -14,6 +14,7 @@ export class CommonServiceTsService {
   private apiproducts = 'http://localhost:8000/api/products/';//use Api for purchase products  and stock products
   private apistockcategory = 'http://localhost:8000/api/stockcategory/';// stockcategory tab Api (main service category)
   private productSubcategory = 'http://localhost:8000/api/productSubcategory/';
+  private getByProduct = 'http://localhost:8000/api/get_product/';
   private selectedProduct = new BehaviorSubject<any>(null);
 
 
@@ -67,33 +68,31 @@ export class CommonServiceTsService {
   getAllProducts():Observable<any>{
     return this.http.get<any>(this.apiproducts)
   }
-
+getAllProductsById(id:any):Observable<any>{
+    return this.http.get<any>(this.apiproducts,id)
+  }
   // allstockcategory(data:any):Observable<any>{
   //   return this.http.post(this.apistockcategory,data)
   // }
 
   allstockcategory(data: any): Observable<any> {
+    const formData = new FormData();
+    formData.append('icon_img', data.ico_img);
+    formData.append('stockcategory', data.stockcategory);
+    return this.http.post(this.apistockcategory, formData);
+  }
 
- const formData = new FormData();
-formData.append('icon_img',data.ico_img ); 
-formData.append('stockcategory',data.stockcategory);
-
-  return this.http.post(this.apistockcategory, formData);
-}
-
-
-
-   getstockcategory():Observable<any>{
+  getstockcategory(): Observable<any> {
     return this.http.get(this.apistockcategory)
   }
 
-insertUpdateProductSubcategory(data: any): Observable<any> {
-  const newdata = this.convertToFormData(data);
-  return this.http.post(this.productSubcategory, newdata);
-}
+  insertUpdateProductSubcategory(data: any): Observable<any> {
+    const newdata = this.convertToFormData(data);
+    return this.http.post(this.productSubcategory, newdata);
+  }
 
-getProductSubcategory(): Observable<any> {
-  return this.http.get(this.productSubcategory);
-}
+  getProductSubcategory(): Observable<any> {
+    return this.http.get(this.productSubcategory);
+  }
 }
 

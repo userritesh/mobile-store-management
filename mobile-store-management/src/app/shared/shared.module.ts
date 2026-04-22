@@ -64,7 +64,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     ButtonComponent,
     ChartOptionsComponent,
     ReportsModule,
-    
+    DropdownComponent
 
   ]
 })
