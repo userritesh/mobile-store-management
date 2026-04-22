@@ -14,7 +14,6 @@ export class CommonServiceTsService {
   private apiproducts = 'http://localhost:8000/api/products/';//use Api for purchase products  and stock products
   private apistockcategory = 'http://localhost:8000/api/stockcategory/';// stockcategory tab Api (main service category)
   private productSubcategory = 'http://localhost:8000/api/productSubcategory/';
-  private getByProduct = 'http://localhost:8000/api/get_product/';
   private selectedProduct = new BehaviorSubject<any>(null);
 
 
@@ -91,8 +90,11 @@ getAllProductsById(id:any):Observable<any>{
     return this.http.post(this.productSubcategory, newdata);
   }
 
-  getProductSubcategory(): Observable<any> {
-    return this.http.get(this.productSubcategory);
-  }
+getProductSubcategory(): Observable<any> {
+  return this.http.get(this.productSubcategory); 
+}
+getcategoryDropdown(): Observable<any> {
+  return this.http.get(this.productSubcategoryDropdown);
+}
 }
 

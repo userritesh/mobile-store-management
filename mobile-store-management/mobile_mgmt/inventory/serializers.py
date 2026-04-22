@@ -89,4 +89,4 @@ class ProductcategorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Productcategory
-        fields =['ico_img','productcategory','stockcategory','description']
+        fields = ['id','ico_img','productcategory','stockcategory','description']
