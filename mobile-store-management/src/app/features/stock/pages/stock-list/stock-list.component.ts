@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { filter } from 'rxjs';
@@ -13,7 +13,7 @@ import { CommonServiceTsService } from 'src/app/common.service.ts.service';
   templateUrl: './stock-list.component.html',
   styleUrls: ['./stock-list.component.scss']
 })
-export class StockListComponent {
+export class StockListComponent implements OnInit {
   activeTabId: SalesTab | null = null;
   tabs:any;   
   path!:string;
@@ -31,19 +31,17 @@ export class StockListComponent {
       // if (this.activeTabId == SalesTab.Stock || this.activeTabId == SalesTab.Invoice) { this.onInit() }
       
       // ************** CHANGED (optimization) **************
-      if ([SalesTab.Stock, SalesTab.Invoice].includes(this.activeTabId)) this.onInit();
+      if ([SalesTab.Stock, SalesTab.Invoice].includes(this.activeTabId)) this.loadData();
     });
   }
 
-  // this.tabs = [];   
-  //  { label: 'Recharge', path: 'recharge', img_path: "assets/img_icon/No_product_img.png" },
-  //   { label: 'Phones', path: 'product', img_path: "assets/img_icon/Phones.webp" },
-  //   { label: 'Accessories', path: 'accessories', img_path: "assets/img_icon/phone_accessories.jpg" }
-
+  ngOnInit(): void {
+    this.loadData();
+  }
 
   showflag: boolean = false
   bakflag: boolean = false
- onInit() {
+  loadData() {
   // this.showflag = false;
   // switch (this.activeTabId) {
   //   case SalesTab.Invoice:
@@ -74,16 +72,6 @@ export class StockListComponent {
     this.location.back();
   }
 
-  // addCard(){
-  //  this.popup.openModalPopup(AddItemsPageComponent,null,'Add category Cad',ModalPopupSize.MD,"", false,true).then(resultData=>{
-  //   if(resultData){  
-  //     this.apiastockcategory.allstockcategory((resultData))
-      
-  //   }
-  //  })
-    
-  // }
-
   addCard(){
   this.popup.openModalPopup(AddItemsPageComponent,null,'Add category Cad',ModalPopupSize.MD,"", false,true)
   .then(resultData=>{
@@ -111,33 +99,3 @@ export class StockListComponent {
   }
   
  }
-
-
-// import { Injectable } from '@angular/core';
-
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class LocalStorageService {
-
-//   // Save data
-//   setItem(key: string, data: any) {
-//     localStorage.setItem(key, JSON.stringify(data));
-//   }
-
-//   // Get data
-//   getItem(key: string): any {
-//     const data = localStorage.getItem(key);
-//     return data ? JSON.parse(data) : null;
-//   }
-
-//   // Remove data
-//   removeItem(key: string) {
-//     localStorage.removeItem(key);
-//   }
-
-//   // Clear all localStorage
-//   clear() {
-//     localStorage.clear();
-//   }
-// }
