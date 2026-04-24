@@ -94,7 +94,7 @@ getProductSubcategory(): Observable<any> {
   return this.http.get(this.productSubcategory); 
 }
 getcategoryDropdown(): Observable<any> {
-  return this.http.get(this.productSubcategoryDropdown);
+  return this.http.get(this.productSubcategory);
 }
 }
 
