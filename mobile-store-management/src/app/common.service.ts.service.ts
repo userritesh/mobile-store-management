@@ -67,8 +67,8 @@ export class CommonServiceTsService {
   getAllProducts():Observable<any>{
     return this.http.get<any>(this.apiproducts)
   }
-getAllProductsById(id:any):Observable<any>{
-    return this.http.get<any>(this.apiproducts,id)
+  getAllProductsById(id: any): Observable<any> {
+    return this.http.get<any>(`${this.apiproducts}${id}/`);
   }
   // allstockcategory(data:any):Observable<any>{
   //   return this.http.post(this.apistockcategory,data)

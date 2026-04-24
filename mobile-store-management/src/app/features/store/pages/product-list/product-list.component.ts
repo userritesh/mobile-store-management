@@ -16,36 +16,33 @@ export class ProductListComponent {
 
   etcdata: any;
   title: any;
-  titalname!:string;
+  titalname!: string;
   allProductList: any[] = [];
   id!: string | null;
-  constructor(public storageService: StorageService,private sellingService:CommonServiceTsService, private router:Router, private route: ActivatedRoute ) { }
+  constructor(public storageService: StorageService, private sellingService: CommonServiceTsService, private router: Router, private route: ActivatedRoute) { }
 
 
   ngOnInit(): void {
     this.titalname = this.storageService.getItem(Storagekey.SelectedProductTitle, true,)
     const data = PRODUCT_CATEGORIES.find((cat) => cat.category === ProductTypeEnum.Accessories);
-     this.id = this.route.snapshot.paramMap.get('id');
-     this.getAllProductById(this.id);
-    // this.getAllProductListdata();
-
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.getAllProductById(this.id);
   }
 
- getAllProductById(id:any) {
+  getAllProductById(id: any) {
     this.sellingService.getAllProductsById(id).subscribe({
       next: (res) => {
-        // if (res) {
-        //   this.allProductList = res.filter((data: any) =>
-        //     (data.productcategory?.toLowerCase() || '') === (this.titalname?.toLowerCase() || '')
-        //   );
-
-        //   console.log(this.productlist);
-        // }
+        if (res) {
+          this.allProductList = Array.isArray(res) ? res : [res];
+        }
+      },
+      error: (err) => {
+        console.error(err);
       }
-    })
+    });
   }
 
-  onSale(data:any){
+  onSale(data: any) {
     this.sellingService.setdata(data)
     this.router.navigate(['/stock/reports']);
   }
