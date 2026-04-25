@@ -22,15 +22,16 @@ import { StorageName } from "src/app/shared/enum/common-enum";
     resizable:true,
   }
 
-   const ProductCategory: GridColumn = {
+  const productcategory: GridColumn = {
     headerName: "Product Category",
-    field: "productcategory",
+    field: "productcategory_name",
     headerClass: "custom-column-group-cell px-0",
     cellClass: "custom-column-group-cell px-0 ",
     editable: false,
     sortable: true,
     resizable:true,
    }
+   
    const ProductPrice: GridColumn = {
     headerName: "Product Price",
     field: "price",
@@ -60,14 +61,13 @@ import { StorageName } from "src/app/shared/enum/common-enum";
    }
 
 
-  export const ColDefsPurchaseFormTable: GridColumn[] = [
-   Brand,
+export const ColDefsPurchaseFormTable: GridColumn[] = [
+  Brand,
   ProductName,
-   ProductCategory,
-   ProductPrice,
-  //  ProductPurchaseDate,
-   ProductImg,
-  ];
+  productcategory,
+  ProductPrice,
+  ProductImg,
+];
 
 
     export const AgGridDataModelPurchaseForm: GridModel = {

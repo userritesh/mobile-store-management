@@ -23,10 +23,10 @@ class DashboardCardSerializer(serializers.ModelSerializer):
 class ProductSerializer(serializers.ModelSerializer):
     image_url = serializers.SerializerMethodField(read_only=True)
     image_src = serializers.CharField(write_only=True, required=False, allow_blank=True)
-
+    productcategory_name = serializers.CharField(source='productcategory.productcategory', read_only=True)
     class Meta:
         model = Product
-        fields = ['id','name','productcategory','brand','details','price','image_src','image_url',]
+        fields = ['id','name','productcategory_name','productcategory','brand','details','price','image_src','image_url',]
         read_only_fields = ['image']
 
    
