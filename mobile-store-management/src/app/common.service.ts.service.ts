@@ -64,8 +64,12 @@ export class CommonServiceTsService {
     return this.http.post(this.apiproducts,data)
   }
 
-  getAllProducts():Observable<any>{
-    return this.http.get<any>(this.apiproducts)
+  getAllProducts(data?:string):Observable<any>{
+    let url = this.apiproducts;
+    if (data) {
+      url += `?search=${data}`;
+    }
+    return this.http.get<any>(url);
   }
   getAllProductsById(id: any): Observable<any> {
     return this.http.get<any>(`${this.apiproducts}${id}/`);

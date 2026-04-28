@@ -70,7 +70,13 @@ class ProductSerializer(serializers.ModelSerializer):
             return request.build_absolute_uri(obj.image.url)
         return None
 
-    
+    def get_search_results(self, search):
+        if search:
+            return self.queryset.filter(
+                Q(name__icontains=search) | 
+                Q(description__icontains=search)
+            )
+        return self.queryset
 
 
 class SellingItemSerializer(serializers.ModelSerializer):

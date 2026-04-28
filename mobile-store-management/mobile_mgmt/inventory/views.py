@@ -8,6 +8,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.decorators import action
+from rest_framework import filters
 
 
 # API for dashboard cards
@@ -19,6 +20,8 @@ class DashboardCardViewSet(viewsets.ModelViewSet):
 class ProductViewSet(viewsets.ModelViewSet): 
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['name', 'details', 'brand']
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)

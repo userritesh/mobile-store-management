@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { debounceTime, Subject } from 'rxjs';
+import { CommonServiceTsService } from 'src/app/common.service.ts.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,7 +9,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
-  constructor(private router:Router){}
+  searchSubject = new Subject<string>();
+  constructor(private router:Router,private sellingService: CommonServiceTsService){}
   topage(path:any){
     switch(path){
           case 'sales' :
@@ -26,5 +29,25 @@ export class DashboardComponent {
     }
 
   }
+  ngOnInit() {
+  this.searchSubject.pipe(
+    debounceTime(500) 
+  ).subscribe(value => {
+    this.searchAPI(value);
+  });
+}
 
+  searchAPI(value: string) {
+    this.sellingService.getAllProducts(value).subscribe({
+      next: (res:any) => {
+        console.log(res);
+        
+      }
+    })
+  }
+
+
+onSearch(value:string){
+this.searchSubject.next(value);
+}
 }

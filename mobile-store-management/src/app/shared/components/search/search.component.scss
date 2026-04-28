@@ -1,0 +1,12 @@
+/* remove input focus */
+.search-box input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* remove any container highlight on focus */
+.search-box:focus-within {
+  outline: none;
+  box-shadow: none;
+  border-color: inherit; /* keep same border */
+}
