@@ -19,6 +19,7 @@ export class ProductListComponent {
   titalname!: string;
   allProductList: any[] = [];
   id!: string | null;
+  items :any[] = [];
   constructor(public storageService: StorageService, private sellingService: CommonServiceTsService, private router: Router, private route: ActivatedRoute) { }
 
 
@@ -43,8 +44,13 @@ export class ProductListComponent {
   }
 
   onSale(data: any) {
-    this.sellingService.setdata(data)
+    const productData = this.items.length >0 ? this.items : [data];
+    this.sellingService.setdata(productData)
     this.router.navigate(['/stock/reports']);
+  }
+
+  addToCard(cardData: any) {
+    this.items.push(cardData)
   }
 
 }

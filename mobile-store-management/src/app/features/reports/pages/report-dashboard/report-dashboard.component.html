@@ -27,18 +27,19 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>{{ selectedProduct.productName || 'N/A' }}</td>
-          <td>{{ selectedProduct.description || '-' }}</td>
-          <td>{{ selectedProduct.category }}</td>
-          <td class="text-end">{{ selectedProduct.price | number: '1.2-2' }}</td>
+        <tr *ngFor="let product of selectedProduct" class="border-0">
+          <td class="pb-0">{{ product.productcategory_name || 'N/A' }}</td>
+          <td class="pb-0">{{ product.description || '-' }}</td>
+          <td class="pb-0">{{ product.category }}</td>
+          <td class="text-end pb-0">{{ product.price | number: '1.2-2' }}</td>
         </tr>
       </tbody>
     </table>
 
     <!-- Total Section -->
-    <div class="text-end mt-3">
-      <p class="fw-bold fs-5">Total: ₹{{ selectedProduct.price | number: '1.2-2' }}</p>
+    <div class="text-end ">
+      <hr m-0 />
+      <p class="fw-bold fs-5 mt-3">Total: ₹{{ total | number: '1.2-2' }}</p>
     </div>
 
     <hr />

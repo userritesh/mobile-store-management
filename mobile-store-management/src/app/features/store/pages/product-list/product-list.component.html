@@ -5,8 +5,18 @@
         [subtitle]="selectcat.details"
         [image]="selectcat.image_url"
         [price]="selectcat.price"
-        height="300">
+        [height]="'300'">
         <button class="btn btn-primary" (click)="onSale(selectcat)">Sale</button>
+        <div class="position-absolute top-0 end-0 m-2" (click)="addToCard(selectcat)">
+          <svg width="30" height="30" viewBox="0 0 24 24">
+            <!-- Cart (Primary color) -->
+            <path d="M3 3H5L6.5 12H18L20 6H7" stroke="#0d6efd" stroke-width="2" />
+        
+            <!-- Plus icon (White) -->
+            <path d="M12 8V12M10 10H14" stroke="#ffffff" stroke-width="2" />
+          </svg>
+        </div>
+
       </app-card>
     </div>
   </div>
