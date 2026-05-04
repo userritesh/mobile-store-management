@@ -54,8 +54,7 @@ import { SearchComponent } from './components/search/search.component';
     AgGridModule,
     FormsModule,
     NgxDropzoneModule,
-     NgSelectModule
-
+     NgSelectModule,
      ],
   exports: [
     FooterComponent,
