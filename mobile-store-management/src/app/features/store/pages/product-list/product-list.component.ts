@@ -19,6 +19,7 @@ export class ProductListComponent {
   titalname!: string;
   allProductList: any[] = [];
   id!: string | null;
+  slectedItems: any;
   constructor(public storageService: StorageService, private sellingService: CommonServiceTsService, private router: Router, private route: ActivatedRoute) { }
 
 
@@ -46,5 +47,8 @@ export class ProductListComponent {
     this.sellingService.setdata(data)
     this.router.navigate(['/stock/reports']);
   }
+onAddtoCartselectcat(items:any){
+   this.slectedItems = [...this.slectedItems,items]
 
+}
 }

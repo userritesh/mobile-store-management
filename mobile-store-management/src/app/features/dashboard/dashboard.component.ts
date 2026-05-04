@@ -10,6 +10,7 @@ import { CommonServiceTsService } from 'src/app/common.service.ts.service';
 })
 export class DashboardComponent {
   searchSubject = new Subject<string>();
+  allProductList!: any[];
   constructor(private router:Router,private sellingService: CommonServiceTsService){}
   topage(path:any){
     switch(path){
@@ -37,17 +38,31 @@ export class DashboardComponent {
   });
 }
 
-  searchAPI(value: string) {
-    this.sellingService.getAllProducts(value).subscribe({
-      next: (res:any) => {
-        console.log(res);
-        
-      }
-    })
+ searchAPI(value: string) {
+  if (!value || value.trim() == '') {
+    this.allProductList = [];
+    return;
   }
+
+  this.sellingService.getAllProducts(value).subscribe({
+    next: (res: any) => {
+      this.allProductList = Array.isArray(res) ? res : [res];
+    },
+    error: (err) => {
+      console.error('Search API error:', err);
+      this.allProductList = [];
+    }
+  });
+}
 
 
 onSearch(value:string){
 this.searchSubject.next(value);
+}
+onAddtoCartselectcat(item:any){
+
+}
+onSale(items:any){
+
 }
 }
