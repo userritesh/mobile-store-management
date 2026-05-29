@@ -9,7 +9,7 @@ export class DropdownComponent {
  @Input() label?: string;
   @Input() placeholder: string = 'Select';
   @Input() items: any[] = [];
-  @Input() bindLabel: string = 'name';
+  @Input() bindLabel: string = '';
   @Input() bindValue: string = 'id';
   @Input() width?: string;
   @Input() value: any = null;

@@ -42,6 +42,10 @@ getAllCategory(){
    });
 }
 
+onAddItem(): void {
+  // reset form or add new item logic
+  this.selectedProduct = {};
+}  
 // getProductSubcategory(){
 //   this.sellingService.getProductSubcategory().subscribe({
 //      next: (res) => {

@@ -1,6 +1,8 @@
 <div class="form-group d-flex gap-2 w-100">
-  <label *ngIf="bindLabel" class="text-primary fw-semibold" [style.width]="width">{{bindLabel}}</label>
+<ng-container *ngIf="bindLabel" >
+    <label  class="text-primary fw-semibold" [style.width]="width">{{bindLabel}}</label>
 
+</ng-container>
   <ng-select 
     class="text-primary"
     [items]="items"
