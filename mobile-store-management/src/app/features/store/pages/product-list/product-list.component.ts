@@ -16,7 +16,7 @@ export class ProductListComponent {
 
   etcdata: any;
   title: any;
-  titalname!: string;
+  titalname: string = '';
   allProductList: any[] = [];
   id!: string | null;
   slectedItems: any;
@@ -25,7 +25,7 @@ export class ProductListComponent {
 
 
   ngOnInit(): void {
-    this.titalname = this.storageService.getItem(Storagekey.SelectedProductTitle, true,)
+    this.titalname = this.storageService.getItem(Storagekey.SelectedProductTitle, true) || '';
     const data = PRODUCT_CATEGORIES.find((cat) => cat.category === ProductTypeEnum.Accessories);
     this.id = this.route.snapshot.paramMap.get('id');
     this.getAllProductById(this.id);

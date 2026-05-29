@@ -16,7 +16,11 @@ export class ProductComponent {
   productcategory!:string;
   image:any;
   preview:any
-  imageBase64: any;
+  // support multiple images
+  previewList: any[] = [];
+  imageBase64List: any[] = [];
+  // list of items staged before saving
+  addedProducts: any[] = [];
   resData: any;
   dropdowndata: any;
 
@@ -61,35 +65,81 @@ getAllCategory(){
 
 
 fileSelected(files:any){
-  const newFile =files?.addedFiles[0]
-  this.image = newFile
-  this.preview = URL.createObjectURL(this.image )
-  const reader = new FileReader();
-  reader.onload = () => {
-    this.imageBase64 = reader.result; 
-  };
-  reader.readAsDataURL(this.image);
+  const newFiles = files?.addedFiles || [];
+  // reset current selections
+  // allow multiple images to be selected
+  for (const f of newFiles) {
+    const file = f as File;
+    this.previewList.push(URL.createObjectURL(file));
+    const reader = new FileReader();
+    reader.onload = (() => {
+      return (e: any) => {
+        this.imageBase64List.push(e.target.result);
+      };
+    })();
+    reader.readAsDataURL(file);
+  }
 }
 
 
 
+  /** Save a single product (legacy) */
   onSave(){
-    this.selectedProduct ={ ...this.selectedProduct,image_src: this.imageBase64   }
-        
-    this.sellingService.insertUpdateProducts(this.selectedProduct).subscribe({next:(res)=>{
+    const payload = { ...this.selectedProduct, images: this.imageBase64List, quantity: this.selectedProduct?.quantity || 1 };
+    this.sellingService.insertUpdateProducts(payload).subscribe({next:(res)=>{
          if(res.isSuccess){
           this.selectedProduct= {};
+          this.previewList = [];
+          this.imageBase64List = [];
           this.getAllProduct();
          }
         },error:(err)=>{
         console.error(err);   
       }})
   }
+
+  /** Add current form as a staged item (appears in the grid below) */
+  addToList(){
+    const item = { ...this.selectedProduct, images: this.imageBase64List.slice(), quantity: this.selectedProduct?.quantity || 1 };
+    this.addedProducts.push(item);
+    // reset form state for next entry
+    this.selectedProduct = {};
+    this.previewList = [];
+    this.imageBase64List = [];
+  }
+
+  /** Save all staged items to backend and refresh product list */
+  saveAll(){
+    if(!this.addedProducts.length){
+      // nothing staged, fallback to single save
+      this.onSave();
+      return;
+    }
+    let completed = 0;
+    for(const p of this.addedProducts){
+      this.sellingService.insertUpdateProducts(p).subscribe({next: (res)=>{
+        completed++;
+        if(completed === this.addedProducts.length){
+          this.addedProducts = [];
+          this.getAllProduct();
+        }
+      }, error: (err)=>{
+        console.error(err);
+        completed++;
+        if(completed === this.addedProducts.length){
+          this.addedProducts = [];
+          this.getAllProduct();
+        }
+      }});
+    }
+  }
   
   cancel(event: Event) {
   event.stopPropagation();
   this.preview = null;
+  this.previewList = [];
   this.image = null;
+  this.imageBase64List = [];
 }
 
 

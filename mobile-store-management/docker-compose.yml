@@ -1,0 +1,38 @@
+version: '3.9'
+
+services:
+  backend:
+    build:
+      context: ./mobile_mgmt
+      dockerfile: Dockerfile
+    env_file:
+      - ./mobile_mgmt/.env
+    ports:
+      - '8000:8000'
+    depends_on:
+      - db
+    volumes:
+      - ./mobile_mgmt:/app
+      - postgres_data:/var/lib/postgresql/data
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    ports:
+      - '4200:80'
+    depends_on:
+      - backend
+
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: mobile_store
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

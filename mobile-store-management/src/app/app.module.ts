@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ApolloModule } from 'apollo-angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
@@ -14,6 +15,7 @@ import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AgGridModule } from 'ag-grid-angular';
 import { ToastrModule } from 'ngx-toastr';
+import { AuthInterceptor } from './core/services/auth.interceptor';
 import { ChartOptionsComponent } from './shared/components/chart-options/chart-options';
 
 @NgModule({
@@ -29,6 +31,7 @@ import { ChartOptionsComponent } from './shared/components/chart-options/chart-o
     SharedModule,
     SalesModule,
     HttpClientModule,
+    ApolloModule,
     NgbModule,
     AgGridModule,
     ToastrModule.forRoot({ 
@@ -36,7 +39,13 @@ import { ChartOptionsComponent } from './shared/components/chart-options/chart-o
       preventDuplicates: true 
     }),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

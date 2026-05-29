@@ -1,0 +1,105 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+2 0 obj
+<< /Length 2453 >>
+stream
+BT
+/F1 10 Tf
+50 820 Td
+(Project Change Summary) Tj
+T*
+() Tj
+T*
+(This PDF explains why each file was changed, what was changed, and how the new files fit into the architecture.) Tj
+T*
+() Tj
+T*
+(Changed files:) Tj
+T*
+(- README.md: added Docker/GraphQL summary and link to CHANGELOG.md.) Tj
+T*
+(- CHANGELOG.md: new detailed file-by-file documentation.) Tj
+T*
+(- package.json: added GraphQL + IndexedDB dependencies for Angular.) Tj
+T*
+(- tsconfig.json: enabled skipLibCheck for Apollo compatibility.) Tj
+T*
+(- angular.json: verified build configuration and budgets.) Tj
+T*
+(- package-lock.json: updated after installing dependencies.) Tj
+T*
+(- .dockerignore: ignore files for frontend Docker build.) Tj
+T*
+(- mobile_mgmt/.dockerignore: ignore files for backend Docker build.) Tj
+T*
+(- Dockerfile.frontend: build Angular app and serve with nginx.) Tj
+T*
+(- docker-compose.yml: orchestrate backend, frontend, and PostgreSQL.) Tj
+T*
+(- mobile_mgmt/.env: backend environment settings for Docker.) Tj
+T*
+(- mobile_mgmt/Dockerfile: backend Docker image with Gunicorn.) Tj
+T*
+(- nginx.conf: frontend nginx proxy and SPA routing configuration.) Tj
+T*
+(- mobile_mgmt/requirements.txt: backend Python dependencies including Graphene.) Tj
+T*
+(- mobile_mgmt/mobile_mgmt/settings.py: add Graphene, env-based DB, CORS, HTTPS-ready security.) Tj
+T*
+(- mobile_mgmt/mobile_mgmt/urls.py: add /graphql/ endpoint route.) Tj
+T*
+(- mobile_mgmt/inventory/schema.py: GraphQL schema and sample mutation.) Tj
+T*
+(- src/app/shared/storage.service.ts: secure browser storage wrapper.) Tj
+T*
+(- src/app/shared/indexeddb.service.ts: persistent client token storage via IndexedDB.) Tj
+T*
+(- src/app/core/services/auth.service.ts: token management and remember-me support.) Tj
+T*
+(- src/app/core/services/auth.interceptor.ts: attach Authorization header automatically.) Tj
+T*
+(- src/app/core/services/graphql.service.ts: Apollo client setup for GraphQL requests.) Tj
+T*
+(- src/app/app.component.ts: restore persisted token on startup.) Tj
+T*
+(- src/app/app.module.ts: register HTTP interceptor and Apollo modules.) Tj
+T*
+(- src/app/features/store/pages/product-list/product-list.component.ts: fixed nullable token type read from storage.) Tj
+T*
+() Tj
+T*
+(Example: nginx.conf usage:) Tj
+T*
+(- nginx.conf serves the Angular frontend through nginx.) Tj
+T*
+(- It proxies /api/ and /graphql/ to the Django backend.) Tj
+T*
+(- This allows a single entrypoint for the frontend and backend.) Tj
+ET
+endstream
+endobj
+3 0 obj
+<< /Type /Page /Parent 4 0 R /MediaBox [0 0 595 842] /Contents 2 0 R /Resources << /Font << /F1 1 0 R >> >> >>
+endobj
+4 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+5 0 obj
+<< /Type /Catalog /Pages 4 0 R >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000015 00000 n 
+0000000085 00000 n 
+0000002590 00000 n 
+0000002716 00000 n 
+0000002773 00000 n 
+trailer
+<< /Size 6 /Root 5 0 R >>
+startxref
+2822
+%EOF

@@ -1,17 +1,41 @@
-<div class="card shadow-lg rounded-3 bg-white" style="width: 300px; cursor: pointer;" (click)="navigate()">
-  <img [src]="image ? image : 'assets/img_icon/No_product_img.png'" alt="card image" class="card-img-top img-fluid"
-    [style.height.px]="height ? height : null">
+<div class="card modern-card shadow-sm bg-white" (click)="navigate()">
+  <div class="card-img-top img-wrap position-relative">
+    <img [src]="image ? image : 'assets/img_icon/No_product_img.png'" alt="card image" class="img-fluid"
+      [style.height.px]="height ? height : 180" (click)="navigate()">
 
-    <div class="card-body text-center">
-    <h5 class="card-title mb-2">{{ title }}</h5>
+    <!-- Details overlay button on image -->
+    <button type="button" class="btn btn-sm btn-link details-btn text-primary" (click)="toggleDetails(); $event.stopPropagation()" aria-label="Toggle details"
+      [class.fw-bold]="showDetails">
+      {{ showDetails ? 'Hide Details' : 'Details' }}
+    </button>
+  </div>
 
-    <p class="card-text text-truncate w-100 mb-1" [class.invisible]="!subtitle">
-      {{ subtitle || 'Placeholder' }}
-    </p>
+  <div class="card-body">
+    <h5 class="card-title mb-1" (click)="navigate()" style="cursor: pointer;">{{ title }}</h5>
+    <p class="card-subtitle text-muted mb-2 text-truncate">{{ subtitle || '' }}</p>
 
-    <p class="fw-bold text-success mb-0" [class.invisible]="!price">
-      ₹{{ price || '0' }}
-    </p>
+    <p class="text-primary fw-bold fs-5 mb-2">{{ price ? ('$' + (price | number:'1.0-0')) : '' }}</p>
+
+    <div class="d-flex gap-2 mb-3 flex-wrap">
+      <span class="badge bg-light text-dark">Stock: {{ payload?.stock || '' }}</span>
+      <span class="badge bg-primary">{{ subtitle }}</span>
+    </div>
+
+    <button class="btn btn-primary w-100" type="button" (click)="emitAction(); $event.stopPropagation()" [disabled]="payload?.stock === 0">
+      <i class="fas fa-shopping-cart me-2" aria-hidden="true"></i>
+      {{ payload?.stock === 0 ? 'Out of Stock' : 'Add to Cart' }}
+    </button>
+
+    <div *ngIf="showDetails" class="product-details small text-muted mt-3">
+      <h6 class="mb-1">Specifications</h6>
+      <ul *ngIf="isArraySpec(); else specObj">
+        <li *ngFor="let s of specs">{{ s }}</li>
+      </ul>
+      <ng-template #specObj>
+        <div *ngIf="isStringSpec()">{{ specs }}</div>
+        <div *ngIf="!specs" class="text-muted">No specification</div>
+      </ng-template>
+    </div>
 
     <ng-content></ng-content>
   </div>

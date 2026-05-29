@@ -2,8 +2,10 @@
     <form class=" p-2 ">
        
       <div class="d-flex flex-column gap-2 border p-2 px-3 rounded">
-        <div class="d-flex justify-content-end pb-2"><app-button class="btn-primary" [tag]="'Save'"
-            (click)="onSave()"></app-button>
+        <div class="d-flex justify-content-end pb-2">
+          <app-button class="btn-secondary me-2" [tag]="'Add Item'" (click)="addToList()"></app-button>
+          <app-button class="btn-primary" [tag]="'Save All'" (click)="saveAll()"></app-button>
+        </div>
         </div>
         <div class="d-flex">
           <div class="col-10">
@@ -40,47 +42,76 @@
                 <app-input class="col-12 col-md-4" [inputPlaceholder]="'Product Brand '"
                   [(inputvalue)]="selectedProduct.brand" [width]="'150px'" [label]="'Product brand'"></app-input>
               </div>
-      
               <div class="col-12 col-md-4">
                 <app-input class="col-12 col-md-4" [inputPlaceholder]="'Product details '"
                   [(inputvalue)]="selectedProduct.details" [width]="'183px'" [label]="'Product details'"></app-input>
-              </div>     
-                   
-            </div>
-          </div>
-          
-          <!-- <div class="col-12 col-md-4 d-flex gap-2 align-items-center">
-            <label for="" class="text-primary fs-6 fw-semibold">Product image</label>
-            <app-image-input [height]="'40px'" [width]="'120px'" (fileSelected)="fileSelected($event)"></app-image-input>
-          
-            <div *ngIf="preview" class="position-relative d-inline-block mt-2"> <img [src]="preview" alt="Preview" width="80"
-                height="80" style="object-fit: cover; border-radius: 5px;">
-              <app-button (click)="cancel()" [tag]="'x'"
-                class=" btn btn-sm btn-danger position-absolute top-0 end-0 rounded-circle p-0 "></app-button>
-            </div>
-          </div> -->
+              </div>
 
-          <div ngx-dropzone class=" uploadProductImage justify-content-center" [accept]="'image/jpeg,.png,.jpg,.glb,.stl/*'" (change)="fileSelected($event)">
-            <label class="text-primary fs-6 fw-semibold" *ngIf="!preview">Product image</label>
+              <div class="col-12 col-md-4">
+                <app-input class="col-12 col-md-4" [inputPlaceholder]="'Quantity'"
+                  [(inputvalue)]="selectedProduct.quantity" [width]="'100px'" [label]="'Quantity'"></app-input>
+              </div>
                    
-            <!-- Preview -->
-            <div *ngIf="preview" class="position-relative d-inline-block mt-2">
-              <img [src]="preview" alt="Preview" width="115" height="115" style="object-fit: cover; border-radius: 5px;" />
-            
-              <app-button (click)="cancel($event)" [tag]="'x'"
-                class="btn btn-sm btn-danger position-absolute top-0 end-0 rounded-circle p-0">
-              </app-button>
             </div>
+          </div>
           
+          <div class="col-12 col-md-4 d-flex gap-2 align-items-center">
+            <label for="" class="text-primary fs-6 fw-semibold">Product image</label>
+            <div ngx-dropzone class=" uploadProductImage justify-content-center" [accept]="'image/jpeg,.png,.jpg,.glb,.stl/*'" [multiple]="true" (change)="fileSelected($event)">
+              <label class="text-primary fs-6 fw-semibold" *ngIf="!previewList?.length">Product image</label>
+
+              <!-- Preview -->
+              <div *ngIf="previewList?.length" class="d-flex gap-2 flex-wrap mt-2">
+                <div *ngFor="let p of previewList; let i = index" class="position-relative d-inline-block">
+                  <img [src]="p" alt="Preview" width="115" height="115" style="object-fit: cover; border-radius: 5px;" />
+                  <app-button (click)="previewList.splice(i,1); imageBase64List.splice(i,1)" [tag]="'x'"
+                    class="btn btn-sm btn-danger position-absolute top-0 end-0 rounded-circle p-0"></app-button>
+                </div>
+              </div>
+
+            </div>
           </div>
+        </div>
+      </form>
+      <div>
+        <!-- Staged products preview table -->
+        <div *ngIf="addedProducts?.length" class="mt-3 card p-2">
+          <h6 class="mb-2">Staged Items</h6>
+          <div class="table-responsive">
+            <table class="table table-sm table-bordered">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Product Name</th>
+                  <th>Brand</th>
+                  <th>Category</th>
+                  <th>Price</th>
+                  <th>Qty</th>
+                  <th>Images</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let a of addedProducts; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ a.name }}</td>
+                  <td>{{ a.brand }}</td>
+                  <td>{{ a.productcategory }}</td>
+                  <td>{{ a.price }}</td>
+                  <td>{{ a.quantity }}</td>
+                  <td>
+                    <img *ngIf="a.images?.length" [src]="a.images[0]" width="50" height="50" style="object-fit:cover">
+                  </td>
+                  <td><button class="btn btn-sm btn-danger" (click)="addedProducts.splice(i,1)">Remove</button></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-      
-      </div>
-    </form>
-    <div>
+        </div>
+
         <app-grid [dataModel]="agGridDataModel" [rowData]="resData">
         </app-grid>
-    </div>
+      </div>
 </div>
 
 <!-- <div class="container-fluid p-2">

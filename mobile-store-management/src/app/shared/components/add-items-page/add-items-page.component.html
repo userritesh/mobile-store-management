@@ -17,18 +17,46 @@
                 bindValue="id" [(value)]="selectedCategory">
             </app-dropdown>
         </div>
-        <div ngx-dropzone class=" uploadImage justify-content-center" [accept]="data?.isAcceptAllDoc ? '*' : 'image/jpeg,.png,.jpg,.glb,.stl'"
+        <div class="upload-section w-100">
+          <ngx-dropzone
+            class="upload-dropzone justify-content-center"
+            [accept]="data?.isAcceptAllDoc ? '*' : 'image/jpeg,.png,.jpg'"
+            [multiple]="false"
             (change)="onSelect($event)">
-            <h4 *ngIf="files.length == 0">uploadImage</h4>
-            <div *ngIf="files.length > 0">
-                <div *ngFor="let file of files" class="preview-image w-50 h-50">
-                    <img [src]="file.url" alt="">
-                </div>
+            <div class="upload-dropzone-content" *ngIf="!imagePreviewUrl">
+              <i class="fas fa-cloud-upload-alt fa-2x" aria-hidden="true"></i>
+              <h4>Click to upload or drag and drop</h4>
+              <p class="text-muted">PNG, JPG up to 5MB</p>
             </div>
-    
+            <div class="upload-dropzone-content" *ngIf="imagePreviewUrl">
+                <h5>Drop a new image to replace</h5>
+                <i class="fas fa-plus"></i>
+                <p class="text-muted">Current file: {{ selectedImageFile?.name }}</p>
+            </div>
+            <div *ngIf="imagePreviewUrl" class="image-preview-card mt-3">
+            <img [src]="imagePreviewUrl" alt="Selected product image preview" />
+            <div class="preview-meta d-flex justify-content-between align-items-center mt-2">
+              <small class="text-muted">{{ selectedImageFile?.name }}</small>
+              <button
+                type="button"
+                class="btn btn-sm btn-outline-danger"
+                (click)="removeImage()"
+                aria-label="Remove selected image">
+                Remove
+              </button>
+            </div>
+          </div>
+          </ngx-dropzone>
+
+          
         </div>
-    
     </div>
 
-       <app-button class="mb-3" (buttonOutputEvent)="addCard()" [buttonType]="'button'" [tag]="'Save'"></app-button>
+       <app-button 
+         class="mb-3" 
+         (buttonOutputEvent)="addCard()" 
+         [buttonType]="'button'" 
+         [tag]="'Save'"
+         [disabled]="!canSave()">
+       </app-button>
     </form>

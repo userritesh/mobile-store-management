@@ -10,10 +10,27 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+ENVIRONMENT = os.environ.get('DJANGO_DEBUG', 'False').lower() in ('1', 'true', 'yes')
+
+def env_bool(name: str, default: bool = False) -> bool:
+    value = os.environ.get(name)
+    if value is None:
+        return default
+    return value.lower() in ('1', 'true', 'yes')
+
+
+def env_list(name: str, default: list[str] = None) -> list[str]:
+    raw = os.environ.get(name, '')
+    if raw.strip() == '':
+        return default or []
+    return [item.strip() for item in raw.split(',') if item.strip()]
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -23,9 +40,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-egegfvjce56vx!t$k19k%1ho72)w+*g4vzo^&c1%_&h@675+kn'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = ENVIRONMENT
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = env_list('DJANGO_ALLOWED_HOSTS', ['localhost', '127.0.0.1', '0.0.0.0'])
 
 
 # Application definition
@@ -40,6 +57,7 @@ INSTALLED_APPS = [
     'inventory',
     'rest_framework',
     'corsheaders',
+    'graphene_django',
 ]
 
 MIDDLEWARE = [
@@ -54,11 +72,14 @@ MIDDLEWARE = [
   
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    
-    "http://localhost:4200",
-    "http://localhost:50928",
-]
+CORS_ALLOWED_ORIGINS = env_list('CORS_ALLOWED_ORIGINS', [
+    'http://localhost:4200',
+    'http://localhost:50928',
+    'https://localhost:4200',
+    'https://127.0.0.1:4200',
+])
+
+CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = 'mobile_mgmt.urls'
 
@@ -84,12 +105,24 @@ WSGI_APPLICATION = 'mobile_mgmt.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if os.environ.get('POSTGRES_DB'):
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.environ['POSTGRES_DB'],
+            'USER': os.environ.get('POSTGRES_USER', 'postgres'),
+            'PASSWORD': os.environ.get('POSTGRES_PASSWORD', ''),
+            'HOST': os.environ.get('POSTGRES_HOST', 'localhost'),
+            'PORT': os.environ.get('POSTGRES_PORT', '5432'),
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 
 # Password validation
@@ -135,6 +168,16 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+GRAPHENE = {
+    'SCHEMA': 'inventory.schema.schema'
+}
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = env_bool('DJANGO_SECURE_SSL_REDIRECT', False)
+SESSION_COOKIE_SECURE = env_bool('DJANGO_SECURE_SSL_REDIRECT', False)
+CSRF_COOKIE_SECURE = env_bool('DJANGO_SECURE_SSL_REDIRECT', False)
+CSRF_TRUSTED_ORIGINS = env_list('DJANGO_CSRF_TRUSTED_ORIGINS', ['https://localhost', 'https://127.0.0.1'])
 
 MEDIA_URL = '/media/'  # URL prefix for media files
 MEDIA_ROOT = BASE_DIR / "inventory" / "static" / "img_icon"

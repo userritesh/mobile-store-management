@@ -1,0 +1,42 @@
+.modern-card {
+	border-radius: 8px;
+	overflow: hidden;
+	width: 100%;
+}
+.modern-card .img-wrap {
+	background: linear-gradient(180deg, #fff, #f8f9fa);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 180px;
+	position: relative;
+}
+.modern-card img {
+	max-height: 100%;
+	object-fit: contain;
+}
+.modern-card .card-body {
+	padding: 0.75rem 1rem 1rem 1rem;
+}
+.modern-card .card-title { font-size: 0.95rem; font-weight: 700; }
+.modern-card .card-subtitle { font-size: .85rem; color: #6c757d; }
+.modern-card .price { font-size: 1.05rem; color: #0d6efd; font-weight: 700; }
+.modern-card .badge { font-size: 0.75rem; }
+.modern-card .btn-primary { background-color: #0d6efd; border-color: #0d6efd; }
+.modern-card .product-details { margin-top: .5rem; }
+.modern-card .details-btn {
+	position: absolute;
+	right: 8px;
+	bottom: 8px;
+	z-index: 5;
+	opacity: 0.95;
+}
+
+.modern-card .details-btn.text-primary {
+	color: var(--primary-color) !important;
+}
+
+.modern-card .details-btn.text-primary.fw-bold {
+	font-weight: 700;
+}
+
