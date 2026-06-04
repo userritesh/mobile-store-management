@@ -17,12 +17,14 @@ import { AgGridModule } from 'ag-grid-angular';
 import { ToastrModule } from 'ngx-toastr';
 import { AuthInterceptor } from './core/services/auth.interceptor';
 import { ChartOptionsComponent } from './shared/components/chart-options/chart-options';
+import { LoginFormComponent } from './layout/login-form/login-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     DashboardComponent,
+    LoginFormComponent,
   ],
   imports: [
     BrowserModule,

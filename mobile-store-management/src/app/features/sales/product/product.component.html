@@ -11,23 +11,22 @@
       <!-- Row 1: Name, Category, Price -->
       <div class="row g-3">
         <div class="col-12 col-md-4">
-          <label for="">Product Name</label>
-          <app-input [inputPlaceholder]="'Enter product name'" [width]="'100%'" [(inputvalue)]="selectedProduct.name">
+          <!-- <label for="">Product Name</label> -->
+          <app-input  [label]="'Product Name'"[inputPlaceholder]="'Enter product name'" [width]="'200px'" [(inputvalue)]="selectedProduct.name">
           </app-input>
         </div>
 
         <div class="col-12 col-md-4">
-          <label for="">Product Category</label>
+          <!-- <label for="">Product Category</label> -->
 
-          <app-dropdown [placeholder]="'Select category'" [width]="'100%'" [searchable]="true" bindValue="id"
+          <app-dropdown [bindLabel]="'Product Category'" [placeholder]="'Select category'" [width]="'200px'" [searchable]="true" bindValue="id"
             [items]="dropdowndata" [(value)]="selectedProduct.productcategory">
           </app-dropdown>
         </div>
 
         <div class="col-12 col-md-4">
-          <label>Product Price
-          </label>
-          <app-input [inputPlaceholder]="'0.00'" [width]="'100%'" [(inputvalue)]="selectedProduct.price">
+          <!-- <label>Product Price          </label> -->
+          <app-input [label]="'Product Price'"[inputPlaceholder]="'0.00'" [width]="'200px'" [(inputvalue)]="selectedProduct.price">
           </app-input>
         </div>
       </div>
@@ -35,22 +34,21 @@
       <!-- Row 2: Brand, Details, Quantity -->
       <div class="row g-3">
         <div class="col-12 col-md-4">
-          <label>Product Brand</label>
-          <app-input [inputPlaceholder]="'Enter brand name'" [width]="'100%'" [(inputvalue)]="selectedProduct.brand">
+          <!-- <label>Product Brand</label> -->
+          <app-input [label]="'Product Brand'" [inputPlaceholder]="'Enter brand name'" [width]="'200px'" [(inputvalue)]="selectedProduct.brand">
           </app-input>
         </div>
 
         <div class="col-12 col-md-4">
-          <label for="">Product Details</label>
-          <app-input [inputPlaceholder]="'Enter product details'" [width]="'100%'"
+          <!-- <label for="">Product Details</label> -->
+          <app-input [label]="'Product Details'" [inputPlaceholder]="'Enter product details'" [width]="'200px'"
             [(inputvalue)]="selectedProduct.details">
           </app-input>
         </div>
 
         <div class="col-12 col-md-4">
-          <label for=""> Quantity
-          </label>
-          <app-input [inputPlaceholder]="'0'" [width]="'100%'" [(inputvalue)]="selectedProduct.quantity">
+          <!-- <label for=""> Quantity          </label> -->
+          <app-input [label]="'Quantity'" [inputPlaceholder]="'0'" [width]="'200px'" [(inputvalue)]="selectedProduct.quantity">
           </app-input>
         </div>
       </div>
@@ -181,7 +179,7 @@
             <app-image-input
               style="display:block; min-width:120px;"
               [height]="'40px'"
-              [width]="'120px'"
+              [width]="'200px'"
               (fileSelected)="fileSelected($event)">
             </app-image-input>
           </div>

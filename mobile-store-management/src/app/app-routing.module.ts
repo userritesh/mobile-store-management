@@ -5,11 +5,12 @@ import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { SalesComponent } from './features/sales/sales/sales.component';
 import { PurchaseListComponent } from './features/stock/pages/purchase-list/purchase-list.component';
 import { ProductComponent } from './features/sales/product/product.component';
+import { LoginFormComponent } from './layout/login-form/login-form.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent,
+    component: HomeComponent,  
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent },
@@ -18,6 +19,7 @@ const routes: Routes = [
       {path:'purchase',component:ProductComponent}
     ]
   },
+  { path: 'login', component: LoginFormComponent },
   { path: 'cart', loadChildren: () => import('./features/cart/cart.module').then(m => m.CartModule) },
   { path: 'checkout', loadChildren: () => import('./features/checkout/checkout.module').then(m => m.CheckoutModule) },
   { path: 'payments', loadChildren: () => import('./features/payments/payments.module').then(m => m.PaymentsModule) },
@@ -28,6 +30,7 @@ const routes: Routes = [
   { path: 'stock', loadChildren: () => import('./features/stock/stock.module').then(m => m.StockModule) },
   { path: 'notifications', loadChildren: () => import('./features/notifications/notifications.module').then(m => m.NotificationsModule) },
   { path: 'users', loadChildren: () => import('./features/users/users.module').then(m => m.UsersModule) },
+
 ];
 
 
