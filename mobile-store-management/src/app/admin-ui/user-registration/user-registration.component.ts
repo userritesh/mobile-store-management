@@ -196,8 +196,8 @@ export class UserRegistrationComponent implements OnDestroy {
           this.registrationResult = result;
           this.isSubmitting = false;
         },
-        error: () => {
-          this.submitError = 'Registration failed. Please try again.';
+        error: (err: Error) => {
+          this.submitError = err.message || 'Registration failed. Please try again.';
           this.isSubmitting = false;
         }
       });

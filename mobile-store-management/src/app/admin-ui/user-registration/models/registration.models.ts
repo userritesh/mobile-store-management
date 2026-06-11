@@ -56,6 +56,22 @@ export interface RegistrationResult {
   status: RegistrationStatus;
 }
 
+/** POST /api/auth/register/clients/ */
+export interface ClientRegistrationRequest {
+  company_name: string;
+  company_email: string;
+  contact_person: string;
+  password: string;
+  phone?: string;
+}
+
+export interface ClientRegistrationResponse {
+  detail: string;
+  id: string;
+  status?: RegistrationStatus;
+  created_at?: string;
+}
+
 export const BUSINESS_TYPES = [
   'Retail Store',
   'Mobile Shop',

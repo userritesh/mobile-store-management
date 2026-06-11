@@ -176,4 +176,9 @@ class RegisterClientView(APIView):
             status=ClientRegistration.STATUS_PENDING,
         )
 
-        return Response({'detail': 'Registration received', 'id': str(reg.id)}, status=status.HTTP_201_CREATED)
+        return Response({
+            'detail': 'Registration received',
+            'id': str(reg.id),
+            'status': reg.status,
+            'created_at': reg.created_at.isoformat(),
+        }, status=status.HTTP_201_CREATED)
