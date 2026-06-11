@@ -78,7 +78,7 @@ CORS_ALLOWED_ORIGINS = env_list('CORS_ALLOWED_ORIGINS', [
     'http://localhost:4200',
     'http://localhost:50928',
     'https://localhost:61846',
-    'https://127.0.0.1:4200',
+    'https://127.0.0.1:56230',
 ])
 
 CORS_ALLOW_CREDENTIALS = True

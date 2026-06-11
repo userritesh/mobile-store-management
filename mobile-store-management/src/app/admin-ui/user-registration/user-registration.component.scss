@@ -1,0 +1,326 @@
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+
+:host {
+  --reg-primary: #4f46e5;
+  --reg-primary-light: #eef2ff;
+  --reg-success: #10b981;
+  --reg-border: #e5e7eb;
+  --reg-text: #111827;
+  --reg-muted: #6b7280;
+  --reg-radius: 12px;
+  display: block;
+}
+
+.registration-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  color: var(--reg-text);
+}
+
+.page-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.page-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.status-badge {
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+}
+
+/* Stepper */
+.stepper-wrapper {
+  background: #fff;
+  border: 1px solid var(--reg-border);
+  border-radius: var(--reg-radius);
+  padding: 1.25rem 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.stepper-track {
+  height: 4px;
+  background: #e5e7eb;
+  border-radius: 4px;
+  margin-bottom: 1.25rem;
+  overflow: hidden;
+}
+
+.stepper-progress {
+  height: 100%;
+  background: linear-gradient(90deg, var(--reg-primary), #818cf8);
+  border-radius: 4px;
+  transition: width 0.35s ease;
+}
+
+.stepper-steps {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.25rem;
+}
+
+.stepper-step {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  transition: opacity 0.2s;
+
+  &:disabled {
+    cursor: default;
+    opacity: 0.55;
+  }
+
+  .step-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f3f4f6;
+    color: var(--reg-muted);
+    font-size: 1.1rem;
+    border: 2px solid transparent;
+    transition: all 0.25s ease;
+  }
+
+  .step-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--reg-muted);
+  }
+
+  &.active .step-icon {
+    background: var(--reg-primary);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.35);
+  }
+
+  &.active .step-label {
+    color: var(--reg-primary);
+  }
+
+  &.completed .step-icon {
+    background: var(--reg-success);
+    color: #fff;
+  }
+
+  &.completed .step-label {
+    color: var(--reg-success);
+  }
+}
+
+/* Cards */
+.step-card {
+  border-radius: var(--reg-radius);
+  overflow: hidden;
+}
+
+.summary-card,
+.sticky-summary {
+  border-radius: var(--reg-radius);
+}
+
+.sticky-summary {
+  position: sticky;
+  top: 1rem;
+}
+
+/* Plan cards */
+.plan-card {
+  border: 2px solid var(--reg-border);
+  border-radius: var(--reg-radius);
+  padding: 1.25rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  position: relative;
+  background: #fff;
+
+  &:hover {
+    border-color: #a5b4fc;
+    box-shadow: 0 8px 24px rgba(79, 70, 229, 0.1);
+    transform: translateY(-2px);
+  }
+
+  &.selected {
+    border-color: var(--reg-primary);
+    background: var(--reg-primary-light);
+    box-shadow: 0 8px 24px rgba(79, 70, 229, 0.15);
+  }
+
+  &.recommended {
+    border-color: #c7d2fe;
+  }
+}
+
+.plan-badge {
+  position: absolute;
+  top: -10px;
+  right: 12px;
+  background: linear-gradient(135deg, var(--reg-primary), #818cf8);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.plan-price .amount {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--reg-primary);
+}
+
+.plan-price .period {
+  font-size: 0.85rem;
+  color: var(--reg-muted);
+}
+
+.plan-features li {
+  padding: 0.2rem 0;
+}
+
+.plan-select {
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+/* Review */
+.review-section {
+  background: #f9fafb;
+  border: 1px solid var(--reg-border);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+}
+
+.review-heading {
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: var(--reg-primary);
+}
+
+.review-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 0.75rem 1.5rem;
+
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .review-full {
+    grid-column: 1 / -1;
+  }
+
+  strong {
+    font-size: 0.9rem;
+  }
+}
+
+.review-checkboxes {
+  background: #fff;
+  border: 1px dashed var(--reg-border);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+}
+
+/* Success */
+.success-panel {
+  border-radius: var(--reg-radius);
+}
+
+.success-icon {
+  font-size: 4rem;
+  color: var(--reg-success);
+  line-height: 1;
+}
+
+.summary-tile {
+  background: #f9fafb;
+  border: 1px solid var(--reg-border);
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.approval-flow .flow-pill {
+  background: #f3f4f6;
+  color: var(--reg-muted);
+  font-weight: 600;
+  padding: 0.4rem 0.85rem;
+
+  &.active {
+    background: #fef3c7;
+    color: #b45309;
+  }
+}
+
+/* Form polish */
+.form-label {
+  font-weight: 600;
+  font-size: 0.875rem;
+  margin-bottom: 0.35rem;
+}
+
+.input-group-text {
+  background: #f9fafb;
+  border-color: var(--reg-border);
+  color: var(--reg-muted);
+}
+
+.form-control,
+.form-select {
+  border-color: var(--reg-border);
+  border-radius: 8px;
+
+  &:focus {
+    border-color: var(--reg-primary);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+  }
+}
+
+.btn-primary {
+  background: var(--reg-primary);
+  border-color: var(--reg-primary);
+
+  &:hover {
+    background: #4338ca;
+    border-color: #4338ca;
+  }
+}
+
+.card-header.bg-primary {
+  background: linear-gradient(135deg, var(--reg-primary), #6366f1) !important;
+}
+
+@media (max-width: 767.98px) {
+  .stepper-step .step-icon {
+    width: 34px;
+    height: 34px;
+    font-size: 0.95rem;
+  }
+
+  .page-title {
+    font-size: 1.25rem;
+  }
+
+  .review-grid {
+    grid-template-columns: 1fr;
+  }
+}

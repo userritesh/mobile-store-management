@@ -1,0 +1,459 @@
+<div class="registration-page">
+  <!-- Page Header -->
+  <div class="page-header mb-4">
+    <div>
+      <h2 class="page-title mb-1">
+        <i class="bi bi-person-plus-fill me-2 text-primary"></i>Client Registration
+      </h2>
+      <p class="text-muted mb-0">Complete all steps to register your business on the platform</p>
+    </div>
+    <span class="badge status-badge bg-primary-subtle text-primary">SaaS Onboarding</span>
+  </div>
+
+  <!-- Alerts -->
+  <div *ngIf="submitError" class="alert alert-danger alert-dismissible fade show" role="alert">
+    <i class="bi bi-exclamation-triangle-fill me-2"></i>{{ submitError }}
+    <button type="button" class="btn-close" (click)="submitError = ''" aria-label="Close"></button>
+  </div>
+
+  <!-- Progress Stepper -->
+  <div class="stepper-wrapper mb-4" *ngIf="!isSuccessStep">
+    <div class="stepper-track">
+      <div class="stepper-progress" [style.width.%]="(currentStep / (steps.length - 1)) * 100"></div>
+    </div>
+    <div class="stepper-steps">
+      <button
+        *ngFor="let step of steps; let i = index"
+        type="button"
+        class="stepper-step"
+        [class.active]="isStepActive(i)"
+        [class.completed]="isStepComplete(i)"
+        [disabled]="i > currentStep"
+        (click)="goToStep(i)">
+        <span class="step-icon">
+          <i class="bi" [ngClass]="isStepComplete(i) && !isStepActive(i) ? 'bi-check-lg' : step.icon"></i>
+        </span>
+        <span class="step-label d-none d-sm-inline">{{ step.label }}</span>
+      </button>
+    </div>
+  </div>
+
+  <form [formGroup]="registrationForm" (ngSubmit)="currentStep === 4 ? submitRegistration() : nextStep()" novalidate>
+
+    <!-- ==================== SUCCESS PAGE ==================== -->
+    <div *ngIf="isSuccessStep && registrationResult" class="success-panel card border-0 shadow-sm">
+      <div class="card-body text-center p-4 p-md-5">
+        <div class="success-icon mb-3">
+          <i class="bi bi-check-circle-fill"></i>
+        </div>
+        <h3 class="fw-bold text-success mb-2">Registration Submitted Successfully</h3>
+        <p class="text-muted mb-4">Your application has been received and is awaiting admin approval.</p>
+
+        <div class="row justify-content-center g-3 mb-4">
+          <div class="col-md-4">
+            <div class="summary-tile">
+              <small class="text-muted">Registration Number</small>
+              <div class="fw-bold text-primary">{{ registrationResult.registrationNumber }}</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="summary-tile">
+              <small class="text-muted">Registration Date</small>
+              <div class="fw-bold">{{ formatDate(registrationResult.registrationDate) }}</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="summary-tile">
+              <small class="text-muted">Status</small>
+              <span class="badge bg-warning-subtle text-warning-emphasis mt-1">
+                <i class="bi bi-hourglass-split me-1"></i>{{ registrationResult.status }} Approval
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="approval-flow mb-4">
+          <small class="text-muted d-block mb-2">Admin Approval Flow</small>
+          <div class="d-flex flex-wrap justify-content-center gap-2">
+            <span class="badge rounded-pill flow-pill active">Pending</span>
+            <i class="bi bi-arrow-right text-muted"></i>
+            <span class="badge rounded-pill flow-pill">Approved</span>
+            <i class="bi bi-arrow-right text-muted"></i>
+            <span class="badge rounded-pill flow-pill">Rejected</span>
+            <i class="bi bi-arrow-right text-muted"></i>
+            <span class="badge rounded-pill flow-pill">Suspended</span>
+          </div>
+        </div>
+
+        <button type="button" class="btn btn-primary px-4" (click)="startNewRegistration()">
+          <i class="bi bi-plus-circle me-2"></i>Register Another Client
+        </button>
+      </div>
+    </div>
+
+    <!-- ==================== FORM STEPS ==================== -->
+    <div *ngIf="!isSuccessStep" class="row g-4">
+      <div [class]="currentStep === 3 ? 'col-lg-8' : 'col-12'">
+        <div class="card border-0 shadow-sm step-card">
+          <div class="card-header bg-white border-bottom py-3">
+            <h5 class="mb-0 fw-semibold">
+              <ng-container [ngSwitch]="currentStep">
+                <span *ngSwitchCase="0"><i class="bi bi-person-circle me-2 text-primary"></i>Step 1 — Account Registration</span>
+                <span *ngSwitchCase="1"><i class="bi bi-building me-2 text-primary"></i>Step 2 — Company / Shop Details</span>
+                <span *ngSwitchCase="2"><i class="bi bi-layers me-2 text-primary"></i>Step 3 — Subscription Plan</span>
+                <span *ngSwitchCase="3"><i class="bi bi-credit-card me-2 text-primary"></i>Step 4 — Payment</span>
+                <span *ngSwitchCase="4"><i class="bi bi-check2-circle me-2 text-primary"></i>Step 5 — Review &amp; Submit</span>
+              </ng-container>
+            </h5>
+          </div>
+
+          <div class="card-body p-4">
+
+            <!-- STEP 1: ACCOUNT -->
+            <div *ngIf="currentStep === 0" formGroupName="account">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label">Username <span class="text-danger">*</span></label>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-at"></i></span>
+                    <input type="text" class="form-control" formControlName="username" placeholder="johndoe"
+                      [class.is-invalid]="isInvalid('account', 'username')">
+                  </div>
+                  <div class="invalid-feedback d-block" *ngIf="isInvalid('account', 'username')">
+                    <span *ngIf="registrationForm.get('account.username')?.errors?.['required']">Username is required.</span>
+                    <span *ngIf="registrationForm.get('account.username')?.errors?.['minlength']">Minimum 3 characters.</span>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label">Email Address <span class="text-danger">*</span></label>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                    <input type="email" class="form-control" formControlName="email" placeholder="name@company.com"
+                      [class.is-invalid]="isInvalid('account', 'email')">
+                  </div>
+                  <div class="invalid-feedback d-block" *ngIf="isInvalid('account', 'email')">
+                    <span *ngIf="registrationForm.get('account.email')?.errors?.['required']">Email is required.</span>
+                    <span *ngIf="registrationForm.get('account.email')?.errors?.['email']">Enter a valid email address.</span>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label">Mobile Number <span class="text-danger">*</span></label>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-phone"></i></span>
+                    <input type="tel" class="form-control" formControlName="mobile" placeholder="9876543210"
+                      [class.is-invalid]="isInvalid('account', 'mobile')">
+                  </div>
+                  <div class="invalid-feedback d-block" *ngIf="isInvalid('account', 'mobile')">
+                    Enter a valid 10-digit Indian mobile number.
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label">Password <span class="text-danger">*</span></label>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                    <input [type]="showPassword ? 'text' : 'password'" class="form-control" formControlName="password"
+                      placeholder="Min. 8 characters" [class.is-invalid]="isInvalid('account', 'password')">
+                    <button type="button" class="btn btn-outline-secondary" (click)="showPassword = !showPassword">
+                      <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+                    </button>
+                  </div>
+                  <div class="password-strength mt-2" *ngIf="registrationForm.get('account.password')?.value">
+                    <div class="d-flex justify-content-between small mb-1">
+                      <span class="text-muted">Password strength</span>
+                      <span class="fw-semibold" [style.color]="passwordStrength.color">{{ passwordStrength.label }}</span>
+                    </div>
+                    <div class="progress" style="height: 4px;">
+                      <div class="progress-bar" [style.width.%]="passwordStrength.percent" [style.backgroundColor]="passwordStrength.color"></div>
+                    </div>
+                  </div>
+                  <div class="invalid-feedback d-block" *ngIf="isInvalid('account', 'password')">
+                    Password must be at least 8 characters.
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label">Confirm Password <span class="text-danger">*</span></label>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-shield-lock"></i></span>
+                    <input [type]="showConfirmPassword ? 'text' : 'password'" class="form-control"
+                      formControlName="confirmPassword" placeholder="Re-enter password"
+                      [class.is-invalid]="isInvalid('account', 'confirmPassword') || hasGroupError('account', 'passwordMismatch')">
+                    <button type="button" class="btn btn-outline-secondary" (click)="showConfirmPassword = !showConfirmPassword">
+                      <i class="bi" [ngClass]="showConfirmPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+                    </button>
+                  </div>
+                  <div class="invalid-feedback d-block"
+                    *ngIf="hasGroupError('account', 'passwordMismatch') || isInvalid('account', 'confirmPassword')">
+                    <span *ngIf="hasGroupError('account', 'passwordMismatch')">Passwords do not match.</span>
+                    <span *ngIf="!hasGroupError('account', 'passwordMismatch') && isInvalid('account', 'confirmPassword')">Please confirm your password.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- STEP 2: COMPANY -->
+            <div *ngIf="currentStep === 1" formGroupName="company">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label">Company / Shop Name <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" formControlName="companyName" placeholder="ABC Mobile Store"
+                    [class.is-invalid]="isInvalid('company', 'companyName')">
+                  <div class="invalid-feedback d-block" *ngIf="isInvalid('company', 'companyName')">Company name is required.</div>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Business Type <span class="text-danger">*</span></label>
+                  <select class="form-select" formControlName="businessType" [class.is-invalid]="isInvalid('company', 'businessType')">
+                    <option value="" disabled>Select business type</option>
+                    <option *ngFor="let type of businessTypes" [value]="type">{{ type }}</option>
+                  </select>
+                  <div class="invalid-feedback d-block" *ngIf="isInvalid('company', 'businessType')">Please select a business type.</div>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Owner Name <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" formControlName="ownerName" placeholder="Full name"
+                    [class.is-invalid]="isInvalid('company', 'ownerName')">
+                  <div class="invalid-feedback d-block" *ngIf="isInvalid('company', 'ownerName')">Owner name is required.</div>
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label">GST Number</label>
+                  <input type="text" class="form-control text-uppercase" formControlName="gstNumber" placeholder="22AAAAA0000A1Z5"
+                    [class.is-invalid]="isInvalid('company', 'gstNumber')">
+                  <div class="invalid-feedback d-block" *ngIf="isInvalid('company', 'gstNumber')">Invalid GST format.</div>
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label">PAN Number</label>
+                  <input type="text" class="form-control text-uppercase" formControlName="panNumber" placeholder="ABCDE1234F"
+                    [class.is-invalid]="isInvalid('company', 'panNumber')">
+                  <div class="invalid-feedback d-block" *ngIf="isInvalid('company', 'panNumber')">Invalid PAN format.</div>
+                </div>
+                <div class="col-12">
+                  <label class="form-label">Address Line 1 <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" formControlName="addressLine1" placeholder="Street, building"
+                    [class.is-invalid]="isInvalid('company', 'addressLine1')">
+                  <div class="invalid-feedback d-block" *ngIf="isInvalid('company', 'addressLine1')">Address is required.</div>
+                </div>
+                <div class="col-12">
+                  <label class="form-label">Address Line 2</label>
+                  <input type="text" class="form-control" formControlName="addressLine2" placeholder="Landmark (optional)">
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label">City <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" formControlName="city" [class.is-invalid]="isInvalid('company', 'city')">
+                  <div class="invalid-feedback d-block" *ngIf="isInvalid('company', 'city')">City is required.</div>
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label">State <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" formControlName="state" [class.is-invalid]="isInvalid('company', 'state')">
+                  <div class="invalid-feedback d-block" *ngIf="isInvalid('company', 'state')">State is required.</div>
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label">Country <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" formControlName="country" [class.is-invalid]="isInvalid('company', 'country')">
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label">Pincode <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" formControlName="pincode" placeholder="6 digits"
+                    [class.is-invalid]="isInvalid('company', 'pincode')">
+                  <div class="invalid-feedback d-block" *ngIf="isInvalid('company', 'pincode')">Enter a valid 6-digit pincode.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- STEP 3: SUBSCRIPTION -->
+            <div *ngIf="currentStep === 2" formGroupName="subscription">
+              <p class="text-muted mb-4">Choose one plan that fits your business needs.</p>
+              <div class="row g-3">
+                <div class="col-md-4" *ngFor="let plan of plans">
+                  <div class="plan-card h-100"
+                    [class.selected]="registrationForm.get('subscription.planId')?.value === plan.id"
+                    [class.recommended]="plan.recommended"
+                    (click)="selectPlan(plan.id)" role="button" tabindex="0"
+                    (keyup.enter)="selectPlan(plan.id)">
+                    <span *ngIf="plan.recommended" class="plan-badge">Most Popular</span>
+                    <h5 class="fw-bold mb-1">{{ plan.name }}</h5>
+                    <div class="plan-price mb-2">
+                      <span class="amount">${{ plan.price }}</span>
+                      <span class="period">/ {{ plan.duration }}</span>
+                    </div>
+                    <ul class="plan-features list-unstyled small mb-3">
+                      <li *ngFor="let feature of plan.features">
+                        <i class="bi bi-check-circle-fill text-success me-2"></i>{{ feature }}
+                      </li>
+                    </ul>
+                    <div class="plan-limits small text-muted">
+                      <div><i class="bi bi-people me-1"></i>{{ plan.userLimit }}</div>
+                      <div><i class="bi bi-hdd me-1"></i>{{ plan.storageLimit }}</div>
+                    </div>
+                    <div class="plan-select mt-3">
+                      <i class="bi" [ngClass]="registrationForm.get('subscription.planId')?.value === plan.id ? 'bi-check-circle-fill text-primary' : 'bi-circle text-muted'"></i>
+                      <span class="ms-1">{{ registrationForm.get('subscription.planId')?.value === plan.id ? 'Selected' : 'Select Plan' }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="text-danger small mt-2"
+                *ngIf="registrationForm.get('subscription.planId')?.invalid && registrationForm.get('subscription.planId')?.touched">
+                Please select a subscription plan.
+              </div>
+            </div>
+
+            <!-- STEP 4: PAYMENT -->
+            <div *ngIf="currentStep === 3" formGroupName="payment">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label">Payment Method <span class="text-danger">*</span></label>
+                  <select class="form-select" formControlName="paymentMethod" [class.is-invalid]="isInvalid('payment', 'paymentMethod')">
+                    <option value="" disabled>Select payment method</option>
+                    <option *ngFor="let method of paymentMethods" [value]="method">{{ method }}</option>
+                  </select>
+                  <div class="invalid-feedback d-block" *ngIf="isInvalid('payment', 'paymentMethod')">Payment method is required.</div>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Transaction ID <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" formControlName="transactionId" placeholder="TXN123456789"
+                    [class.is-invalid]="isInvalid('payment', 'transactionId')">
+                  <div class="invalid-feedback d-block" *ngIf="isInvalid('payment', 'transactionId')">Valid transaction ID is required.</div>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Amount (USD)</label>
+                  <div class="input-group">
+                    <span class="input-group-text">$</span>
+                    <input type="number" class="form-control" formControlName="amount" readonly>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- STEP 5: REVIEW -->
+            <div *ngIf="currentStep === 4">
+              <div class="review-section mb-4">
+                <h6 class="review-heading"><i class="bi bi-person me-2"></i>Account Details</h6>
+                <div class="review-grid">
+                  <div><span class="text-muted">Username</span><strong>{{ registrationForm.get('account.username')?.value }}</strong></div>
+                  <div><span class="text-muted">Email</span><strong>{{ registrationForm.get('account.email')?.value }}</strong></div>
+                  <div><span class="text-muted">Mobile</span><strong>{{ registrationForm.get('account.mobile')?.value }}</strong></div>
+                </div>
+              </div>
+
+              <div class="review-section mb-4">
+                <h6 class="review-heading"><i class="bi bi-building me-2"></i>Company Details</h6>
+                <div class="review-grid">
+                  <div><span class="text-muted">Company</span><strong>{{ registrationForm.get('company.companyName')?.value }}</strong></div>
+                  <div><span class="text-muted">Business Type</span><strong>{{ registrationForm.get('company.businessType')?.value }}</strong></div>
+                  <div><span class="text-muted">Owner</span><strong>{{ registrationForm.get('company.ownerName')?.value }}</strong></div>
+                  <div><span class="text-muted">GST</span><strong>{{ registrationForm.get('company.gstNumber')?.value || '—' }}</strong></div>
+                  <div><span class="text-muted">PAN</span><strong>{{ registrationForm.get('company.panNumber')?.value || '—' }}</strong></div>
+                  <div class="review-full">
+                    <span class="text-muted">Address</span>
+                    <strong>
+                      {{ registrationForm.get('company.addressLine1')?.value }},
+                      {{ registrationForm.get('company.city')?.value }},
+                      {{ registrationForm.get('company.state')?.value }} —
+                      {{ registrationForm.get('company.pincode')?.value }}
+                    </strong>
+                  </div>
+                </div>
+              </div>
+
+              <div class="review-section mb-4" *ngIf="selectedPlan">
+                <h6 class="review-heading"><i class="bi bi-layers me-2"></i>Selected Plan</h6>
+                <div class="review-grid">
+                  <div><span class="text-muted">Plan</span><strong>{{ selectedPlan.name }}</strong></div>
+                  <div><span class="text-muted">Price</span><strong>${{ selectedPlan.price }} / {{ selectedPlan.duration }}</strong></div>
+                  <div><span class="text-muted">Users</span><strong>{{ selectedPlan.userLimit }}</strong></div>
+                  <div><span class="text-muted">Storage</span><strong>{{ selectedPlan.storageLimit }}</strong></div>
+                </div>
+              </div>
+
+              <div class="review-section mb-4">
+                <h6 class="review-heading"><i class="bi bi-credit-card me-2"></i>Payment Details</h6>
+                <div class="review-grid">
+                  <div><span class="text-muted">Method</span><strong>{{ registrationForm.get('payment.paymentMethod')?.value }}</strong></div>
+                  <div><span class="text-muted">Transaction ID</span><strong>{{ registrationForm.get('payment.transactionId')?.value }}</strong></div>
+                  <div><span class="text-muted">Amount</span><strong>${{ registrationForm.get('payment.amount')?.value }}</strong></div>
+                </div>
+              </div>
+
+              <div formGroupName="review" class="review-checkboxes">
+                <div class="form-check mb-2">
+                  <input class="form-check-input" type="checkbox" formControlName="termsAccepted" id="termsCheck"
+                    [class.is-invalid]="isInvalid('review', 'termsAccepted')">
+                  <label class="form-check-label" for="termsCheck">
+                    I agree to <a href="#" class="text-primary" (click)="$event.preventDefault()">Terms &amp; Conditions</a>
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" formControlName="privacyAccepted" id="privacyCheck"
+                    [class.is-invalid]="isInvalid('review', 'privacyAccepted')">
+                  <label class="form-check-label" for="privacyCheck">
+                    I agree to <a href="#" class="text-primary" (click)="$event.preventDefault()">Privacy Policy</a>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Navigation Buttons -->
+          <div class="card-footer bg-white border-top d-flex justify-content-between py-3">
+            <button type="button" class="btn btn-outline-secondary" (click)="previousStep()" [disabled]="currentStep === 0 || isSubmitting">
+              <i class="bi bi-arrow-left me-1"></i> Previous
+            </button>
+
+            <button *ngIf="currentStep < 4" type="submit" class="btn btn-primary px-4">
+              Next <i class="bi bi-arrow-right ms-1"></i>
+            </button>
+
+            <button *ngIf="currentStep === 4" type="button" class="btn btn-success px-4"
+              [disabled]="isSubmitting" (click)="submitRegistration()">
+              <span *ngIf="!isSubmitting"><i class="bi bi-send me-1"></i> Submit Registration</span>
+              <span *ngIf="isSubmitting">
+                <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                Submitting...
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Payment Summary Sidebar -->
+      <div class="col-lg-4" *ngIf="currentStep === 3">
+        <div class="card border-0 shadow-sm summary-card sticky-summary">
+          <div class="card-header bg-primary text-white py-3">
+            <h6 class="mb-0"><i class="bi bi-receipt me-2"></i>Payment Summary</h6>
+          </div>
+          <div class="card-body">
+            <ng-container *ngIf="selectedPlan; else noPlan">
+              <div class="d-flex justify-content-between mb-2">
+                <span class="text-muted">Plan</span>
+                <strong>{{ selectedPlan.name }}</strong>
+              </div>
+              <div class="d-flex justify-content-between mb-2">
+                <span class="text-muted">Duration</span>
+                <span>{{ selectedPlan.duration }}</span>
+              </div>
+              <div class="d-flex justify-content-between mb-2">
+                <span class="text-muted">Users</span>
+                <span>{{ selectedPlan.userLimit }}</span>
+              </div>
+              <div class="d-flex justify-content-between mb-3">
+                <span class="text-muted">Storage</span>
+                <span>{{ selectedPlan.storageLimit }}</span>
+              </div>
+              <hr>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="fw-semibold">Total Amount</span>
+                <span class="fs-4 fw-bold text-primary">${{ selectedPlan.price }}</span>
+              </div>
+            </ng-container>
+            <ng-template #noPlan>
+              <p class="text-muted mb-0 small">Select a plan in Step 3 to see summary.</p>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

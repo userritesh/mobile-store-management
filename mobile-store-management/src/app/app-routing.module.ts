@@ -24,6 +24,7 @@ const routes: Routes = [
       { path: 'users/create', loadComponent: () => import('./admin-ui/users/user-create.component').then(m => m.AdminUserCreateComponent) },
       { path: 'users/:id/edit', loadComponent: () => import('./admin-ui/users/user-edit.component').then(m => m.AdminUserEditComponent) },
       { path: 'users/:id', loadComponent: () => import('./admin-ui/users/user-details.component').then(m => m.AdminUserDetailsComponent) },
+      { path: 'registration', loadComponent: () => import('./admin-ui/user-registration/user-registration.component').then(m => m.UserRegistrationComponent) },
     ]
   },
   {
