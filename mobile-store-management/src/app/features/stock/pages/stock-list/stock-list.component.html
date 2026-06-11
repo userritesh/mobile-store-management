@@ -82,21 +82,32 @@
             <!-- Category Card - Repeats for each category -->
             <div *ngFor="let tab of tabs; trackBy: trackByCategoryName" class="col-6 col-md-4 col-lg-3">
       
-              <div class="card shadow-lg rounded-3 bg-white h-100 cursor-pointer category-card"
+              <!-- <div class="card shadow-lg rounded-3 bg-white h-100 cursor-pointer category-card"
                 [routerLink]="['stockCategory']" (click)="toggleDetailView()" role="button" tabindex="0"
-                (keyup.enter)="toggleDetailView()" [attr.aria-label]="'Browse ' + tab.stockcategory + ' category'">
+                (keyup.enter)="toggleDetailView()" [attr.aria-label]="'Browse ' + tab.stockcategory + ' category'"> -->
       
                 <!-- Category Image -->
-                <img [src]="tab.icon_img" [alt]="tab.stockcategory + ' icon'" class="card-img-top border-bottom"
-                  loading="lazy">
+                <!-- <img [src]="tab.icon_img" [alt]="tab.stockcategory + ' icon'" class="card-img-top border-bottom"
+                  loading="lazy"> -->
       
                 <!-- Category Name -->
-                <div class="card-body text-center">
+                <!-- <div class="card-body text-center">
                   <h6 class="text-primary mb-0">
                     {{ tab.stockcategory }}
                   </h6>
                 </div>
-              </div>
+              </div> -->
+
+               <app-card
+              [title]="tab.stockcategory"
+              [subtitle]="tab.stockcategory"
+              [image]="tab.icon_img"
+              [specs]="getSpecs(tab)"
+              (action)="addToCart($event)"
+              [route]="'/stock/stockCategory'"
+              (click)="toggleDetailView()"
+              >
+            </app-card>
             </div>
       
           </div>

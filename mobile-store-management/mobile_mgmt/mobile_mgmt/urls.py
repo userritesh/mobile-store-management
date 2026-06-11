@@ -24,6 +24,8 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('graphql/', GraphQLView.as_view(graphiql=True)),
+    path('api/auth/', include('accounts.urls')),
+    path('api/rbac/', include('rbac.urls')),
     path('', include('inventory.urls')),
 ]
 if settings.DEBUG:

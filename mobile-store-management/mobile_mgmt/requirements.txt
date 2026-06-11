@@ -4,3 +4,6 @@ djangorestframework>=3.14
 django-cors-headers>=4.0
 graphene-django>=3.2
 gunicorn>=21.0
+PyJWT[crypto]>=2.6
+django-redis>=6.0
+redis>=4.5

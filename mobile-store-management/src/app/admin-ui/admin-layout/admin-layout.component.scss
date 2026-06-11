@@ -1,0 +1,7 @@
+.admin-app { height:100vh; }
+.sidebar { width:220px; min-height:100vh; position:fixed; }
+@media (max-width: 767px) {
+  .sidebar { position:relative; width:100%; }
+}
+main { margin-left:220px; }
+@media (max-width: 767px) { main { margin-left:0; } }

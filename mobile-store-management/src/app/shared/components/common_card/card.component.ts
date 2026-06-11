@@ -40,7 +40,12 @@ export class CardComponent {
   navigate() {
     if (this.route) {
       this.storageService.setItem(Storagekey.SelectedProductTitle, this.title, true);
-      this.router.navigate([this.route, this.id]);
+      // Navigate to route with id only when id is provided; otherwise navigate to the base route
+      if (this.id !== undefined && this.id !== null && this.id !== '') {
+        this.router.navigate([this.route, this.id]);
+      } else {
+        this.router.navigate([this.route]);
+      }
     }
   }
 

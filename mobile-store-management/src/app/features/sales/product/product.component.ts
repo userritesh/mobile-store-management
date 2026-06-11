@@ -43,9 +43,17 @@ getAllCategory(){
 }
 
 onAddItem(): void {
-  // reset form or add new item logic
+
+  this.resData.push({
+    ...this.selectedProduct
+  });
+
+  // Refresh grid
+  this.resData = [...this.resData];
+
+  // Clear form
   this.selectedProduct = {};
-}  
+} 
 // getProductSubcategory(){
 //   this.sellingService.getProductSubcategory().subscribe({
 //      next: (res) => {

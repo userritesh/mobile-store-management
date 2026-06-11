@@ -57,7 +57,9 @@ INSTALLED_APPS = [
     'inventory',
     'rest_framework',
     'corsheaders',
-    'graphene_django',
+    # 'graphene_django',
+    'accounts',
+    'rbac',
 ]
 
 MIDDLEWARE = [
@@ -75,7 +77,7 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = env_list('CORS_ALLOWED_ORIGINS', [
     'http://localhost:4200',
     'http://localhost:50928',
-    'https://localhost:4200',
+    'https://localhost:61846',
     'https://127.0.0.1:4200',
 ])
 
@@ -169,6 +171,9 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Use custom user model from accounts app
+AUTH_USER_MODEL = 'accounts.User'
+
 GRAPHENE = {
     'SCHEMA': 'inventory.schema.schema'
 }
@@ -181,3 +186,31 @@ CSRF_TRUSTED_ORIGINS = env_list('DJANGO_CSRF_TRUSTED_ORIGINS', ['https://localho
 
 MEDIA_URL = '/media/'  # URL prefix for media files
 MEDIA_ROOT = BASE_DIR / "inventory" / "static" / "img_icon"
+
+# JWT and Auth settings
+JWT_ALGORITHM = os.environ.get('JWT_ALGORITHM', 'RS256')
+JWT_PRIVATE_KEY_PATH = os.environ.get('JWT_PRIVATE_KEY_PATH', str(BASE_DIR / 'jwt_private.pem'))
+JWT_PUBLIC_KEY_PATH = os.environ.get('JWT_PUBLIC_KEY_PATH', str(BASE_DIR / 'jwt_public.pem'))
+ACCESS_TOKEN_LIFETIME = int(os.environ.get('ACCESS_TOKEN_LIFETIME', 60*15))
+REFRESH_TOKEN_LIFETIME = int(os.environ.get('REFRESH_TOKEN_LIFETIME', 60*60*24*14))
+
+# Redis (optional) for caching permissions
+REDIS_URL = os.environ.get('REDIS_URL', 'redis://localhost:6379/1')
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': REDIS_URL,
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        }
+    }
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'accounts.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+}

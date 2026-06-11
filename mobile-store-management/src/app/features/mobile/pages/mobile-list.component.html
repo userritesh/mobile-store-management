@@ -1,0 +1,11 @@
+<section class="mobile list">
+  <h2>Mobile List</h2>
+  <p *ngIf="loading">Loading...</p>
+  <p *ngIf="error" class="error">{{ error }}</p>
+  <ul *ngIf="!loading && items.length">
+    <li *ngFor="let m of items">
+      <a [routerLink]="['/mobile/detail', m.id]">{{ m.name }} <small>{{ m.model }}</small></a>
+    </li>
+  </ul>
+  <p *ngIf="!loading && !items.length">No mobiles found.</p>
+</section>
