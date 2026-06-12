@@ -24,12 +24,11 @@ const routes: Routes = [
       { path: 'users/create', loadComponent: () => import('./admin-ui/users/user-create.component').then(m => m.AdminUserCreateComponent) },
       { path: 'users/:id/edit', loadComponent: () => import('./admin-ui/users/user-edit.component').then(m => m.AdminUserEditComponent) },
       { path: 'users/:id', loadComponent: () => import('./admin-ui/users/user-details.component').then(m => m.AdminUserDetailsComponent) },
-      { path: 'registration', loadComponent: () => import('./admin-ui/user-registration/user-registration.component').then(m => m.UserRegistrationComponent) },
     ]
   },
   {
     path: '',
-    component: HomeComponent,  
+    component: HomeComponent,
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent },
@@ -38,9 +37,10 @@ const routes: Routes = [
       { path: 'mobile', loadChildren: () => import('./features/mobile/mobile.module').then(m => m.MobileModule), data: { permissions: ['mobile.list'] }, canLoad: [PermissionGuard] },
       { path: 'sales', loadChildren: () => import('./features/sales/sales.module').then(m => m.SalesModule) },
       { path: 'stock', loadChildren: () => import('./features/stock/stock.module').then(m => m.StockModule) },
-      {path:'purchase',component:ProductComponent}
+      { path: 'purchase', component: ProductComponent }
     ]
   },
+  { path: 'registration', loadComponent: () => import('./admin-ui/user-registration/user-registration.component').then(m => m.UserRegistrationComponent) },
   { path: 'login', component: LoginFormComponent },
   { path: 'cart', loadChildren: () => import('./features/cart/cart.module').then(m => m.CartModule) },
   { path: 'checkout', loadChildren: () => import('./features/checkout/checkout.module').then(m => m.CheckoutModule) },

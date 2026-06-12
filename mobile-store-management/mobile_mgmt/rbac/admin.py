@@ -1,5 +1,6 @@
+from rbac.models import UserRole ,RolePermission,Permission,Role
 from django.contrib import admin
-from .models import Role, Permission, RolePermission, UserRole
+# from .models import Role, Permission, RolePermission, UserRole
 
 
 @admin.register(Role)
@@ -20,3 +21,4 @@ class RolePermissionAdmin(admin.ModelAdmin):
 @admin.register(UserRole)
 class UserRoleAdmin(admin.ModelAdmin):
     list_display = ('user', 'role')
+    search_fields = ('user__username', 'role__name')

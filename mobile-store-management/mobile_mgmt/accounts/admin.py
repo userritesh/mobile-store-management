@@ -55,12 +55,6 @@ class UserAdmin(admin.ModelAdmin):
     remove_all_roles.short_description = 'Remove all roles from selected users and revoke staff'
 
 
-@admin.register(UserRole)
-class UserRoleAdmin(admin.ModelAdmin):
-    list_display = ('user', 'role')
-    search_fields = ('user__username', 'role__name')
-
-
 @admin.register(Company)
 class CompanyAdmin(admin.ModelAdmin):
     list_display = ('company_name', 'company_email', 'status', 'created_at')

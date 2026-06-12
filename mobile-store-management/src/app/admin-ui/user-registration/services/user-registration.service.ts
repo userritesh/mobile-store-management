@@ -14,19 +14,19 @@ import {
   providedIn: 'root'
 })
 export class UserRegistrationService {
-  private readonly registerUrl = '/api/auth/register/clients/';
-
-  constructor(private http: HttpClient) {}
+  /** Django API — same host pattern as CommonServiceTsService */
+  private readonly registerUrl = 'http://localhost:8000/api/auth/register/clients/';
+  constructor(private http: HttpClient) { }
 
   submitRegistration(payload: RegistrationPayload): Observable<RegistrationResult> {
     const body = this.toApiRequest(payload);
 
     return this.http.post<ClientRegistrationResponse>(this.registerUrl, body).pipe(
-        map((response) => this.toRegistrationResult(response)),
-        catchError((error: HttpErrorResponse) =>
-          throwError(() => new Error(this.extractErrorMessage(error)))
-        )
-      );
+      map((response) => this.toRegistrationResult(response)),
+      catchError((error: HttpErrorResponse) =>
+        throwError(() => new Error(this.extractErrorMessage(error)))
+      )
+    );
   }
 
   private toApiRequest(payload: RegistrationPayload): ClientRegistrationRequest {
